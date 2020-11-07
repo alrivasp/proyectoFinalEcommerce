@@ -55,4 +55,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #gemas Usadas Proyecto Ecommerce
+#Autenticacion
 gem 'devise'
+#Idioma Devise
+gem 'devise-i18n-views'
