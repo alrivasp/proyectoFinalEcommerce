@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_011605) do
+ActiveRecord::Schema.define(version: 2020_11_08_222055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,5 +36,54 @@ ActiveRecord::Schema.define(version: 2020_11_07_011605) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "communes", force: :cascade do |t|
+    t.string "name"
+    t.bigint "province_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["province_id"], name: "index_communes_on_province_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.bigint "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_provinces_on_region_id"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name"
+    t.string "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "user_name"
+    t.string "name"
+    t.string "last_name"
+    t.date "born_date"
+    t.integer "gender"
+    t.integer "permission_level", default: 0, null: false
+    t.string "street"
+    t.bigint "commune_id"
+    t.boolean "deactivated", default: false, null: false
+    t.string "udi"
+    t.string "provider"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commune_id"], name: "index_users_on_commune_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "communes", "provinces"
+  add_foreign_key "provinces", "regions"
 end
