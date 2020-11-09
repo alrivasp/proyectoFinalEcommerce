@@ -427,3 +427,14 @@ Commune.create(name: 'Timaukel', province_id: 52)
 Commune.create(name: 'Natales', province_id: 53)
 Commune.create(name: 'Torres del Paine', province_id: 53)
 puts("Se crearon Comunas")
+
+#Categorias
+Category.create(
+    name: "Jeans", 
+    description: "En Latino-América se usa la palabra jeans [leer yins] o bluejeans (jeans azules) para referirse a los pantalones de mezclilla o denim. La palabra jean viene del inglés y esta del francés: jean fustian la cual se referiría a una tela de algodón (fustian) de Génova."
+)
+Category.create(
+    name: "Chaquetas", 
+    description: "Una chaqueta es una prenda de vestir de calle ajustada al torso, con manga larga, solapas y bolsillos, tanto interiores como exteriores, abierta por delante con una botonadura, que permite llevarse abierta o cerrada."
+)
+puts ("Se crearon Categorias")
