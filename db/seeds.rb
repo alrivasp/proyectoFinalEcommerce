@@ -438,3 +438,48 @@ Category.create(
     description: "Una chaqueta es una prenda de vestir de calle ajustada al torso, con manga larga, solapas y bolsillos, tanto interiores como exteriores, abierta por delante con una botonadura, que permite llevarse abierta o cerrada."
 )
 puts ("Se crearon Categorias")
+
+#Marcas
+Mark.create(
+    name: "Brussi",
+    description: "BRUSSI es una marca Colombiana con mas de 20 años en el mercado enfocada en realzar la belleza de la mujer Latina, creando diseños exclusivos y de alta calidad, pensando en el día a día de nuestros clientes tanto nacionales como internacionales, fabricamos diferentes tipos de jeans y blusas ubicándonos como una empresa de trayectoria y experiencia.
+    Nuestras prendas son producidas bajo rigurosos controles de calidad,  elaboradas con telas, insumos y mano de obra colombiana, dando cumplimiento a nuestras políticas de seguridad social y laboral y aportando a la economía del país.  Nuestra meta es mejorar cada día más para así poder ofrecer una mejor calidad a nuestro consumidor final."
+)
+Mark.create(
+    name: "Dirtyjeans",
+    description: "En Dirty Jeans desarrollamos y diseñamos vestuario juvenil semi formal con sello urbano y moderno, exclusivo para mujeres y hombres que buscan calidad, estilo y elegancia.
+    Mas de 20 años avalan nuestro trabajo, dedicándonos a la venta directa en nuestros 6 locales y también a la venta Mayorista, distribuyendo a todo el país.
+    Dirty Jeans desea integrar exclusividad y vanguardia en sus modelos, logrando que cada mujer se sienta única."
+)
+Mark.create(
+    name: "Paradise",
+    description: "18 Años fabricando en Chile los mejores jeans."
+)
+puts ("Se crean Marcas ")
+
+#Modelo de productos
+ModelProduct.create(
+    name: "Full buttons celeste",
+    mark_id: 1
+)
+ModelProduct.create(
+    name: "Jeans básico azul",
+    mark_id: 2
+)
+ModelProduct.create(
+    name: "Flare",
+    mark_id: 3
+)
+ModelProduct.create(
+    name: "Mom jeans",
+    mark_id: 1
+)
+ModelProduct.create(
+    name: "Gravillado",
+    mark_id: 2
+)
+ModelProduct.create(
+    name: "Jeans lazo",
+    mark_id: 3
+)
+puts ("Se crean Modelos segun marca")
