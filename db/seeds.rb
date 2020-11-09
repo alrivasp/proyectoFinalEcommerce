@@ -483,3 +483,78 @@ ModelProduct.create(
     mark_id: 3
 )
 puts ("Se crean Modelos segun marca")
+
+#Tipos de talla
+SizeType.create(
+    name: "Numero"
+)
+SizeType.create(
+    name: "Letra"
+)
+puts ("Se crean tipos de talla")
+
+#Tallas
+#Tallas numerales
+SizeProduct.create(
+    name: "36",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "37",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "38",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "39",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "40",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "41",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "42",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "43",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "44",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "45",
+    size_type_id: 1
+)
+SizeProduct.create(
+    name: "46",
+    size_type_id: 1
+)
+
+#Tallas Letras
+SizeProduct.create(
+    name: "S",
+    size_type_id: 2
+)
+SizeProduct.create(
+    name: "M",
+    size_type_id: 2
+)
+SizeProduct.create(
+    name: "L",
+    size_type_id: 2
+)
+SizeProduct.create(
+    name: "XL",
+    size_type_id: 2
+)
+puts ("Se crean Tallas En numeros y letras")
