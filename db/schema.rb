@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_183305) do
+ActiveRecord::Schema.define(version: 2020_11_09_191411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,19 @@ ActiveRecord::Schema.define(version: 2020_11_09_183305) do
     t.index ["mark_id"], name: "index_model_products_on_mark_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "price"
+    t.boolean "available"
+    t.bigint "category_id"
+    t.bigint "model_product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["model_product_id"], name: "index_products_on_model_product_id"
+  end
+
   create_table "provinces", force: :cascade do |t|
     t.string "name"
     t.bigint "region_id"
@@ -110,5 +123,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_183305) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "communes", "provinces"
   add_foreign_key "model_products", "marks"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "model_products"
   add_foreign_key "provinces", "regions"
 end
