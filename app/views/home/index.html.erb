@@ -1,5 +1,9 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container">
+    <h1>Home#index</h1>
+    <p>Find me in app/views/home/index.html.erb</p>
 
+    <%= @user.nil? ? "verdadero" : "falso" %>
+    <%#= @user.avatar.attached? ? (image_tag @user.avatar.variant(resize: '100x100')) : "falso" %>
+</div>
 
-<%= @user.avatar.attached? ? (image_tag @user.avatar.variant(resize: '100x100')) : "falso" %>
+<%= render 'shared/prueba'%>

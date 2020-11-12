@@ -1,0 +1,41 @@
+<div class="fixed-top">
+  <!--Info de tienda-->
+  <div class="navbar-title text-center p-1 ">
+    <strong><p class="text-light m-1 title-men-sec">TIENDA DE JEANS ONLINE</p></strong>
+  </div>
+  
+  <!--Info de tienda-->
+  <nav class="bg-light shadow-none  navbar-title-dos text-center">
+    <% if user_signed_in? %>
+      <div class=" contenedor-btn-panel">
+        <button type="button" id="sidebarCollapse" class="mb-3 rounded-0 btn-panel">
+          <span><i class="fa fa-bars fa-2x"></i></span>
+        </button>
+      </div>
+      <p class="mb-0 mr-5 pr-5 title-ppal">JEANS LOVERS SHOP</p>
+    <% else %>
+      <p class="mb-0 title-ppal">JEANS LOVERS SHOP</p>
+    <% end %>  
+    <div class="mr-5">
+
+      <%= link_to "<i class='fa fa-shopping-bag fa-2x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe %>
+      <%= link_to "<i class='fa fa-search fa-2x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe %>
+      <% if user_signed_in? %>
+        <%= link_to "<i class='fa fa-sign-out fa-1x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe , destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "<i class='fa fa-user fa-1x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe , new_user_session_path %>
+      <% end %>
+    </div>
+  </nav>
+  <!--Info de tienda-->
+  <div class="container contenedor-menu"> 
+      <nav class="container dropdownmenu">
+        <ul class="row justify-content-center ">
+          <li class="col-3"><%= link_to "Inicio", root_path %></li>
+          <li class="col-3"><%= link_to "Productos"%></li>
+          <li class="col-3"><%= link_to "Tallas"%></li>
+          <li class="col-3"><%= link_to "Contacto"%></li>
+        </ul>
+      </nav>
+  </div>
+</div>

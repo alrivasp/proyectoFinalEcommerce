@@ -27,9 +27,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use ActiveStorage variant
-gem 'mini_magick', '~> 4.8'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -58,8 +55,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #gemas Usadas Proyecto Ecommerce
 #Autenticacion
 gem 'devise'
+#Autenticacion con Facebook
+gem 'omniauth-facebook'
+#Manejo de contraseñas
+gem 'dotenv-rails', groups: [:development, :test]
 #Idioma Devise
 gem 'devise-i18n-views'
 gem 'devise-i18n'
 #Roles
 gem 'cancancan', '~> 2.0'
+# Use ActiveStorage variant
+gem 'mini_magick', '~> 4.8'

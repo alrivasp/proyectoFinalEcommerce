@@ -1,0 +1,27 @@
+<%= content_for :page_scripts do %>
+  <%= javascript_include_tag 'home' %>
+<% end %>
+
+
+<%= image_tag "jls_logo_.png", class:"loader", id:"loader"%>
+<div class=cargando></div>
+
+ <script>
+            var TIEMPO_1_GRADO = 3 // 10 ms
+            var anguloActual  = 0
+            var divGirar       = document.getElementById('loader')
+            function girar(){
+            if(anguloActual == 3600) anguloActual = 0
+            divGirar.style.transform = 'rotateY(' + anguloActual + 'deg)'
+            anguloActual++
+            }
+
+            var intervalID = setInterval(girar, TIEMPO_1_GRADO)
+
+            setTimeout(function(){
+            clearInterval(intervalID)
+            $('.loader').fadeOut('slow');
+            $('.contenido').fadeIn('slow')
+            $('.loader').removeClass('loader');
+            }, 7000)
+      </script>

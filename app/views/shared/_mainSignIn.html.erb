@@ -1,0 +1,53 @@
+<main>
+    <div class="wrapper ">
+      <!-- Sidebar Holder -->
+      <nav id="sidebar" class="shadow-red">
+        <div class="">
+            <%#= @user.avatar.attached? ? (image_tag @user.avatar.variant(resize: '100x100')) : "falso" %>
+            <% if current_user.avatar.attached? %>
+              
+              <%= image_tag current_user.avatar, class:"perfil_photo rounded-circle shadow-perfil" %>
+            <% else %>
+              <%= image_tag("perfil", class:"perfil_photo rounded-circle shadow-perfil" )%>
+            <% end %>
+        </div>
+        <div class="sidebar-header mb-0 text-center">
+          <p class="text-center text-black-50 perfil-date"><%= current_user.user_name.nil? ? " - " : current_user.user_name.upcase %></p>
+          <% if current_user.permission_level == 0 %>
+            <strong class="text-center text-black-50">Cliente</strong>
+          <% else %>
+            <strong class="text-center text-black-50">Administrador</strong>
+
+          <% end %>
+        </div>
+        <div class="content-menu">
+            <% if current_user.permission_level == 0%>
+              <!--Accesos Usuarios-->
+              <%= link_to "<li><span class='lnr lnr-user icon1'></span><h4 class='text1'>Mi Perfil</h4></li>".html_safe, edit_user_registration_path %>
+
+
+              <li><span class="lnr lnr-list icon2"></span><h4 class="text2">Mis Compras</h4></li>
+              <li><span class="lnr lnr-cart icon3"></span><h4 class="text3">Mi Carro</h4></li>
+              <li><span class="lnr lnr-bubble icon4"></span><h4 class="text4">Mensaje</h4></li>
+              <li><span class="lnr lnr-power-switch icon5"></span><h4 class="text5">Cerras Sesion</h4></li>
+            <% else %>
+              <!--Accesos Administradores-->
+              <%= link_to "<li><span class='lnr lnr-user icon1'></span><h4 class='text1'>Mi Perfil</h4></li>".html_safe, edit_user_registration_path %>
+              <li><span class="lnr lnr-users icon1"></span><h4 class="text1">Administrar Usuarios</h4></li>
+              <li><span class="lnr lnr-download icon1"></span><h4 class="text1">Ingreso Mercaderia</h4></li>
+              <li><span class="lnr lnr-store icon1"></span><h4 class="text1">Administrar Productos</h4></li>
+              <li><span class="lnr lnr-briefcase icon1"></span><h4 class="text1">Provedores</h4></li>
+              <li><span class="lnr lnr-chart-bars icon1"></span><h4 class="text1">Dashboard</h4></li>
+              <li><span class="lnr lnr-bubble icon4"></span><h4 class="text4">Mensajes</h4></li>
+              <li><span class="lnr lnr-power-switch icon5"></span><h4 class="text5">Cerras Sesion</h4></li>
+            <% end %>
+        </div>
+      </nav>
+      <!-- Page Content Holder -->
+      <div id="content">
+          <div class="yield-contenido container shadow-red rounded">
+          <%= yield %>
+          </div>
+      </div>
+    </div>
+</main>

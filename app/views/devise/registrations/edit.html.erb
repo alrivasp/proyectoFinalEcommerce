@@ -1,35 +1,86 @@
-<h2><%= t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}") %></h2>
+<div class="container pt-5">
+  <h2 class="text-center"><%= t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}") %></h2>
+  <div class="form-group m-5 pl-5 pr-5 form-devise">
+    <%= form_for(resource, :as => resource_name, class:"form-control", :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <!--error-->
+      <p class="form-devise"><%= devise_error_messages! %>
+      
+      <!--email-->
+      <div><%= f.label :email  %><br/>
+      <%= f.email_field :email, class:"form-control" %></div>
+      <br/>
+      <%- if devise_mapping.confirmable? && resource.pending_reconfirmation? -%>
+        <p>
+          <%= t('.currently_waiting_confirmation_for_email', :email => resource.unconfirmed_email, :default => "Currently waiting confirmation for: %{email}") %>
+        </p>
+      <%- end -%>
+      <!--avatar-->
+      <div><%= f.label :avatar %>(Sube tu nueva foto de perfil a continuación!)<br/>
+        <%= f.file_field :avatar %> </div>
+      
+      <br/>
+      <!--User name-->
+      <div><%= f.label :user_name, "Alias" %><br/>
+        <%= f.text_field :user_name, class:"form-control" %> </div>
+      
+      <br/>
+      <!--name-->
+      <div><%= f.label :name, "Nombre" %><br/>
+        <%= f.text_field :name, class:"form-control" %> </div>
+      
+      <br/>
+      <!--Apellido-->
+      <div><%= f.label :last_name, "Apellido" %><br/>
+        <%= f.text_field :last_name, class:"form-control" %> </div>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+       <br/>
+      <!--Fecha-->
+      <div><%= f.label :born_date, "Fecha de Nacimiento" %><br/>
+        <%= f.date_field :born_date, class:"form-control" %> </div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+      <br/>
+      <!--Genero-->
+      <div><%= f.label :gender, "Genero" %><br/>
+        <%= f.select(:gender, ['Femenino', 'Maculino'], {include_blank: "Seleccione Genero"}, { :class => 'form-control' }) %>
+      
+      <br/>
+      <!--Phone-->
+      <div><%= f.label :phone, "Telefono" %><br/>
+        <%= f.number_field :phone, class:"form-control" %> </div>
 
-  <%- if devise_mapping.confirmable? && resource.pending_reconfirmation? -%>
-    <p>
-      <%= t('.currently_waiting_confirmation_for_email', :email => resource.unconfirmed_email, :default => "Currently waiting confirmation for: %{email}") %>
-    </p>
-  <%- end -%>
+      <br/>
+      <!--Rut-->
+      <div><%= f.label :rut, "Rut" %><br/>
+        <%= f.text_field :rut, class:"form-control" %> </div>
 
-  <div class=”field”> (Upload your new profile picture below!)
-    <%= f.file_field :avatar %> </div>
+      <br/>
+      <!--Direccion-->
+      <div><%= f.label :street, "Direccion" %><br/>
+        <%= f.text_field :street, class:"form-control" %> </div>
+
+      <br/>
+      <!--Comuna-->
+      <div><%= f.label :commune_id, "Comuna" %><br/>
+        <%= f.select(:commune_id, @comunas.collect{|p|[p.name, p.id]},  {include_blank: "Seleccione su Comuna"}, { :class => 'form-control' }) %>
+
+      <br/>
+      <div><%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %>)</i><br />
+      <%= f.password_field :password, class:"form-control", :autocomplete => "off"  %></div>
+      <br/>
+      <div><%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, class:"form-control" %></div>
+      <br/>
+      <div><%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>)</i><br />
+      <%= f.password_field :current_password, class:"form-control" %></div>
+      <br/>
+      <div><%= f.submit t('.update', :default => "Update"),class:"btn btn-primary btn-lg btn-block" %></div>
+    <% end %>
   </div>
-  
-  <div><%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %>)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+  <br/>
+  <div class="text-center form-devise pb-3">
+    <h3><%= t('.cancel_my_account', class:"form-control", :default => 'Cancel my account') %></h3>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+    <p><%= t('.unhappy', class:"form-control", :default => 'Unhappy') %> <%= link_to t('.cancel_my_account', :default => "Cancel my account"), registration_path(resource_name), :data => { :confirm => t('.are_you_sure', :default => "Are you sure?") }, :method => :delete, class:"btn btn-danger" %>.</p>
 
-  <div><%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>)</i><br />
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit t('.update', :default => "Update") %></div>
-<% end %>
-
-<h3><%= t('.cancel_my_account', :default => 'Cancel my account') %></h3>
-
-<p><%= t('.unhappy', :default => 'Unhappy') %>? <%= link_to t('.cancel_my_account', :default => "Cancel my account"), registration_path(resource_name), :data => { :confirm => t('.are_you_sure', :default => "Are you sure?") }, :method => :delete %>.</p>
-
-<%= link_to t('devise.shared.links.back', :default => "Back"), :back %>
+    <%= link_to t('devise.shared.links.back', :default => "Back"), :back, class:"btn btn-warning" %>
+  </div>

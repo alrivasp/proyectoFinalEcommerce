@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_193028) do
     t.string "street"
     t.bigint "commune_id"
     t.boolean "deactivated", default: false, null: false
-    t.string "udi"
+    t.string "uid"
     t.string "provider"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

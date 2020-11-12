@@ -41,7 +41,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :street
       t.references :commune
       t.boolean :deactivated, null: false, default: false
-      t.string :udi
+      t.string :uid
       t.string :provider
 
       t.timestamps null: false
