@@ -41,7 +41,7 @@
       <br/>
       <!--Genero-->
       <div><%= f.label :gender, "Genero" %><br/>
-        <%= f.select(:gender, ['Femenino', 'Maculino'], {include_blank: "Seleccione Genero"}, { :class => 'form-control' }) %>
+        <%= f.select(:gender, ['Masculino', 'Femenino'], {include_blank: "Seleccione Genero"}, { :class => 'form-control' }) %>
       
       <br/>
       <!--Phone-->
@@ -61,7 +61,7 @@
       <br/>
       <!--Comuna-->
       <div><%= f.label :commune_id, "Comuna" %><br/>
-        <%= f.select(:commune_id, @comunas.collect{|p|[p.name, p.id]},  {include_blank: "Seleccione su Comuna"}, { :class => 'form-control' }) %>
+        <%= f.select(:commune_id, @comunas.collect{|p|[p.name, p.id]},  {include_blank: "Seleccione su Comuna"}, { :class => 'form-control' } ) %>
 
       <br/>
       <div><%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %>)</i><br />

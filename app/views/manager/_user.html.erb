@@ -1,0 +1,23 @@
+
+  <tr class="table-detail text-center">
+    <td><%= user.rut %></td>
+    <td><%= user.name %></td>
+    <td><%= user.last_name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.user_name %></td>
+    <td><%= link_to "Ver Detalle", get_profile_info_path(user, 'ver'), remote:true, class:"btn btn-success  btn-sm" %></td>
+    <td>
+      <% if user.deactivated == false %>
+        <%= link_to "Desactivar", get_profile_info_path(user, 'desactivar'), remote:true, class:"btn btn-danger  btn-sm" %>
+      <% else %>
+        <%= link_to "Activar", get_profile_info_path(user, 'activar'), remote:true, class:"btn btn-danger  btn-sm" %>
+      <% end %>
+    </td>
+    <td>
+      <% if user.permission_level == 0 %>
+        <%= link_to "Ser ADMIN", get_profile_info_path(user, 'cambioadmin'), remote:true, class:"btn btn-dark  btn-sm" %>
+      <% else %>
+        <%= link_to "Ser USER", get_profile_info_path(user, 'cambiouser'), remote:true, class:"btn btn-dark  btn-sm" %>
+      <% end %>
+    </td>
+  </tr> 

@@ -8,6 +8,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook]
 
   has_one_attached :avatar
+  belongs_to :commune
+  enum gender: [:Masculino, :Femenino]
 
   #Devise anular el método de destrucción del usuario
   def destroy

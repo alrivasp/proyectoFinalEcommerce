@@ -1,0 +1,11 @@
+<% if @type == 0 %>
+    $("#user_List").html("");
+    $("#user_List").html(" <%= j render partial: 'user', collection: @users %>");
+
+    $("#modalProfileDetail").modal("hide");
+<% else %>
+    $("#admin_List").html("");
+    $("#admin_List").html(" <%= j render partial: 'user', collection: @users %>");
+
+    $("#modalProfileDetail").modal("hide");
+<% end %>

@@ -1,0 +1,109 @@
+//limpiarCampos
+$('#modalProfileDetailLabel').text("")
+$('#bodyModalProfile').text("")
+$('#footerModalProfile').text("")
+//Llenar campos
+    
+    <% if @type == 'ver' %>
+        //Titulo
+        $('#modalProfileDetailLabel').html("<strong>Perfil:</strong> <%= @user.user_name.html_safe %>")
+        //Cuerpo
+            //foto
+            <% if @user.avatar.attached? %>
+                $(document.createElement('div')).addClass("text-center").html("<%= j image_tag @user.avatar, class:'profile_photo ' %>").appendTo("#bodyModalProfile");
+            <% else %>
+                $(document.createElement('div')).addClass("text-center").html('<%= j image_tag("perfil", class:"profile_photo  " )%>').appendTo("#bodyModalProfile");
+            <% end %>
+            //Detalle
+            $(document.createElement('br')).appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html('<strong>Nombre:</strong> <%= @user.name.html_safe %>').appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html(' <%= @user.last_name.html_safe %>').appendTo("#bodyModalProfile");
+            $(document.createElement('br')).appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html('<strong>Rut:</strong> <%= @user.rut.html_safe %>').appendTo("#bodyModalProfile");
+            $(document.createElement('br')).appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html('<strong>Correo:</strong> <%= @user.email.html_safe %>').appendTo("#bodyModalProfile");
+            $(document.createElement('br')).appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html('<strong>Telefono:</strong> <%= @user.phone.html_safe %>').appendTo("#bodyModalProfile");
+            $(document.createElement('br')).appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html('<strong>Direccion:</strong> <%= @user.street.html_safe %>').appendTo("#bodyModalProfile");
+            $(document.createElement('br')).appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html('<strong>Comuna:</strong> <%= @user.commune.name.html_safe %>').appendTo("#bodyModalProfile");
+            $(document.createElement('br')).appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html('<strong>Provincia:</strong> <%= @user.commune.province.name.html_safe %>').appendTo("#bodyModalProfile");
+            $(document.createElement('br')).appendTo("#bodyModalProfile");
+            $(document.createElement('span')).html('<strong>Region:</strong> <%= @user.commune.province.region.name.html_safe %>').appendTo("#bodyModalProfile");
+            //Footer
+            $(document.createElement('button'))
+                                                .addClass("btn btn-primary")
+                                                .attr('id','btnProfileClose')
+                                                .attr('type','button')
+                                                .attr('data-dismiss','modal')
+                                                .text("Cerrar")
+                                                .appendTo("#footerModalProfile");
+    <% elsif @type == 'desactivar' %>
+        //Titulo
+        $('#modalProfileDetailLabel').html("<strong>Desactivar Perfil</strong> ")
+        //Body
+        $(document.createElement('br')).appendTo("#bodyModalProfile");
+        $(document.createElement('h6')).html('¿Esta seguro que quiere <strong>Desactivar</strong> este perfil?').appendTo("#bodyModalProfile");
+        //Footer
+        btn =  '<%= link_to "Confirmar Cambio", inactivate_manager_path(@user), remote: true, method: :post, class:"btn btn-success" %>'
+        $("#footerModalProfile").html(btn)
+        $(document.createElement('button'))
+                                        .addClass("btn btn-primary")
+                                        .attr('id','btnProfileClose')
+                                        .attr('type','button')
+                                        .attr('data-dismiss','modal')
+                                        .text("Cancelar")
+                                        .appendTo("#footerModalProfile");
+    <% elsif @type == 'activar' %>
+        //Titulo
+        $('#modalProfileDetailLabel').html("<strong>Activar Perfil</strong> ")
+        //Body
+        $(document.createElement('br')).appendTo("#bodyModalProfile");
+        $(document.createElement('h6')).html('¿Esta seguro que quiere <strong>Activar</strong> este perfil?').appendTo("#bodyModalProfile");
+        //Footer
+        btn =  '<%= link_to "Confirmar Cambio", activate_manager_path(@user), remote: true, method: :post, class:"btn btn-success" %>'
+        $("#footerModalProfile").html(btn)
+        $(document.createElement('button'))
+                                        .addClass("btn btn-primary")
+                                        .attr('id','btnProfileClose')
+                                        .attr('type','button')
+                                        .attr('data-dismiss','modal')
+                                        .text("Cancelar")
+                                        .appendTo("#footerModalProfile");
+    <% elsif @type == 'cambioadmin' %>
+        //Titulo
+        $('#modalProfileDetailLabel').html("<strong>Modificar Perfil a Administrador</strong>")
+        //Body
+        $(document.createElement('br')).appendTo("#bodyModalProfile");
+        $(document.createElement('h6')).html('¿Esta seguro que quiere <strong>Cambiar el Rol</strong> de este perfil?').appendTo("#bodyModalProfile");
+        //Footer
+        btn =  '<%= link_to "Confirmar Cambio", changeadmin_manager_path(@user), remote: true, method: :post, class:"btn btn-success" %>'
+        $("#footerModalProfile").html(btn)
+        $(document.createElement('button'))
+                                        .addClass("btn btn-primary")
+                                        .attr('id','btnProfileClose')
+                                        .attr('type','button')
+                                        .attr('data-dismiss','modal')
+                                        .text("Cancelar")
+                                        .appendTo("#footerModalProfile");
+    <% elsif @type == 'cambiouser' %>
+        //Titulo
+        $('#modalProfileDetailLabel').html("<strong>Modificar Perfil a Usuario</strong> ")
+        //Body
+        $(document.createElement('br')).appendTo("#bodyModalProfile");
+        $(document.createElement('h6')).html('¿Esta seguro que quiere <strong>Cambiar el Rol</strong> de este perfil?').appendTo("#bodyModalProfile");
+        //Footer
+        btn =  '<%= link_to "Confirmar Cambio", changeuser_manager_path(@user), remote: true, method: :post, class:"btn btn-success" %>'
+        $("#footerModalProfile").html(btn)
+        $(document.createElement('button'))
+        .addClass("btn btn-primary")
+        .attr('id','btnProfileClose')
+        .attr('type','button')
+        .attr('data-dismiss','modal')
+        .text("Cancelar")
+        .appendTo("#footerModalProfile");
+    <% end %>
+
+$("#modalProfileDetail").modal("show")
