@@ -1,5 +1,31 @@
 Rails.application.routes.draw do
-  #Acconuts
+  #Administrador de productos
+  get 'productmanager/main'
+  get 'productmanager/active_products'
+  get 'productmanager/inactive_products'
+  get 'get_productmanager/:product_id/:option', to: 'productmanager#get_productmanager', as: 'get_productmanager_info'
+  post 'activate/:product_id', to: 'productmanager#activate', as: "activate_productmanager"
+  post 'inactivate/:product_id', to: 'productmanager#inactivate', as: "inactivate_productmanager"
+  post 'update', to: 'productmanager#update', as: "update_productmanager"
+  post 'create', to: 'productmanager#create', as: "create_productmanager"
+
+  #Cart
+  get 'cart/main'
+  get 'cart/in_progress'
+  get 'get_item/:item_id/:option', to: 'cart#get_item', as: 'get_item_info'
+  delete 'cart/:item', to: 'cart#remove_item', as: 'remove_cart'
+
+  #Shopping
+  get 'shopping/main'
+  get 'shopping/in_progress'
+  get 'get_order/:order_id/:option', to: 'shopping#get_order', as: 'get_order_info'
+  post 'shopping/:order_id', to: 'shopping#cancel_order', as: "cancel_shopping"
+
+  #products
+  get 'products/main'
+  get 'get_product/:product_id/:option', to: 'products#get_product', as: 'get_product_info'
+
+  #Accounts
   get 'accounts/dashboard_admin'
   get 'accounts/dashboard_user'
 
@@ -25,6 +51,6 @@ Rails.application.routes.draw do
 
   #Default
   root 'home#index'
-  
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

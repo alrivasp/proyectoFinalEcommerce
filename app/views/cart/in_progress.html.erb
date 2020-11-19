@@ -1,0 +1,35 @@
+<div class="p-4">
+    <h2 class="text-center">Carro en proceso de compra</h2>
+    <%= render partial: 'title'%>
+    <div class="mt-4">
+         <div>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr class="table-header text-center">
+                        <th scope="col">Numero de Orden</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Talla</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="item_List_cart">
+                    <%= render partial: "item", collection: @items %>
+                </tbody>
+            </table>
+        <div>
+    </div>
+
+    <div class="p-3">
+        <p class="h1 d-inline ">TOTAL :</p>
+    </div>
+    <div class="d-inline">
+        <%= link_to "$ COMPRAR", root_path, class:"btn btn-warning btn-lg btn-block" %>
+        <%= link_to "CANCELAR COMPRA", root_path, class:"btn btn-danger btn-lg btn-block" %>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+//limpiarCampos
+$('#modalComprasDetailLabel').text("")
+$('#bodyModalOrder').text("")
+$('#footerModalOrder').text("")
+//Llenar campos
+
+    <% if @type == 'ver' %>
+    //Titulo
+    $('#modalComprasDetailLabel').html("<strong>Orden N°:</strong> <%= @order.number.html_safe %>")
+    //Cuerpo
+        //Detalle
+        $(document.createElement('h3')).html('Detalle de Orden').appendTo("#bodyModalOrder")
+                                                                .addClass("text-center mb-2");
+        $(document.createElement('div')).html('<table class="table table-striped"><thead><tr class="text-center"><th scope="col">#</th><th scope="col">Producto</th><th scope="col">Modelo</th><th scope="col">Talla</th><th scope="col">Cantidad</th><th scope="col">Precio</th></tr></thead><tbody id="tbody-order"></tbody>').appendTo("#bodyModalOrder");
+
+        <% num = 1 %>
+        <% @items.each do |item| %>
+            $(document.createElement('tr')).addClass("text-center").html('<th scope="row"><%= num %></th><td><%= item.variant.product.name %></td><td><%= item.variant.product.model_product.name %></td><td><%= item.variant.size_product.name %></td><td><%= item.quantity %></td><td><%= number_to_currency(item.variant.product.price,unit: '$', :precision => 0, format: "%u %n") %></td>').appendTo("#tbody-order");
+            <% num += 1 %>
+        <% end %>
+        
+        
+        //Footer
+        $(document.createElement('button'))
+                                            .addClass("btn btn-primary")
+                                            .attr('id','btnProfileClose')
+                                            .attr('type','button')
+                                            .attr('data-dismiss','modal')
+                                            .text("Cerrar")
+                                            .appendTo("#footerModalOrder");
+    <% elsif @type == 'cancelar' %>
+    //Titulo
+    $('#modalComprasDetailLabel').html("Cancelar <strong>Orden N°:</strong> <%= @order.number.html_safe %>")
+    //Body
+    $(document.createElement('br')).appendTo("#bodyModalOrder");
+    $(document.createElement('h5')).html('¿Esta seguro de querer cancelar la Orden?').appendTo("#bodyModalOrder")
+                                                                .addClass("text-center mb-2");
+    $(document.createElement('br')).appendTo("#bodyModalOrder");
+    
+    //Footer
+    btn =  '<%= link_to "Confirmar", cancel_shopping_path(@order), remote: true, method: :post, class:"btn btn-success" %>'
+    $("#footerModalOrder").html(btn)
+    $(document.createElement('button'))
+                                            .addClass("btn btn-primary")
+                                            .attr('id','btnProfileClose')
+                                            .attr('type','button')
+                                            .attr('data-dismiss','modal')
+                                            .text("Volver")
+                                            .appendTo("#footerModalOrder");
+    <% end %>
+
+
+$("#modalComprasDetail").modal("show")
+

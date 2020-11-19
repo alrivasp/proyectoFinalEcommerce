@@ -1,0 +1,97 @@
+//limpiarCampos
+$('#modalProductmanagerLabel').text("")
+$('#bodyModalProductManager').text("")
+$('#footerModalProductManager').text("")
+
+//Llenar campos
+    
+    <% if @type == 'ver' %>
+        //Titulo
+        $('#modalProductmanagerLabel').html("<strong> <%= @product.name.html_safe %>  </strong>")
+        //Cuerpo
+        $(document.createElement('div')).html("<%= j render 'detailProduct' %>").appendTo("#bodyModalProductManager");
+
+        $(document.createElement('h1')).html("<%= @product.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('br')).appendTo("#bodyProductManager");
+        <% if @product.front.attached? %>
+            img =  '<%= image_tag  @product.front.variant(resize: "400x500"), class:"" %>'
+            $("#photoFrontProduct").html(img)
+        <% else %>
+            img = '<%= image_tag("photo-default", class:"photo-default" )%>'
+            $("#photoFrontProduct").html(img)
+        <% end  %>
+        $(document.createElement('p')).html("<strong>Descripcion:</strong><%= @product.description.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Modelo:</strong><%= @product.model_product.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Marca:</strong><%= @product.model_product.mark.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Categoria:</strong><%= @product.category.name.html_safe %>").appendTo("#bodyProductManager");
+    <% @variants.each do |variant|%>
+        $(document.createElement('span')).html("<strong>Stock:</strong><%= variant.stock %>").appendTo("#bodyProductManager");
+        $(document.createElement('i')).html("      ").appendTo("#bodyProductManager");
+        $(document.createElement('i')).html("<strong>Talla:</strong> <%= variant.size_product.name %>").appendTo("#bodyProductManager");
+        $(document.createElement('br')).appendTo("#bodyProductManager");
+    <% end %>
+    $(document.createElement('br')).appendTo("#bodyProductManager");
+    $(document.createElement('h2')).html("<strong>Precio: </strong><%= number_to_currency(@product.price ,unit: '$', :precision => 0, format: '%u %n') %>").appendTo("#bodyProductManager");
+    //footer
+    $(document.createElement('button'))
+                                    .addClass("btn btn-primary")
+                                    .attr('id','btnProfileClose')
+                                    .attr('type','button')
+                                    .attr('data-dismiss','modal')
+                                    .text("Cerrar")
+                                    .appendTo("#footerModalProductManager");
+    $("#modalProductmanager").modal("show")
+    <% elsif @type == 'desactivar' %>
+        //Titulo
+        $('#modalProductmanagerLabel').html("<strong>Desactivar Producto</strong> <%= @product.name.html_safe %>")
+        //Body
+        $(document.createElement('br')).appendTo("#bodyModalProductManager");
+        $(document.createElement('h6')).html('¿Esta seguro que quiere <strong>Desactivar</strong> este Producto?').appendTo("#bodyModalProductManager");
+        //Footer
+        btn =  '<%= link_to "Confirmar Cambio", inactivate_productmanager_path(@product), remote: true, method: :post, data: { disable_with: "Procesando..." }, class:"btn btn-success" %>'
+        $("#footerModalProductManager").html(btn)
+        $(document.createElement('button'))
+                                        .addClass("btn btn-primary")
+                                        .attr('id','btnProfileClose')
+                                        .attr('type','button')
+                                        .attr('data-dismiss','modal')
+                                        .text("Cancelar")
+                                        .appendTo("#footerModalProductManager");
+    $("#modalProductmanager").modal("show")
+    <% elsif @type == 'activar' %>
+    //Titulo
+    $('#modalProductmanagerLabel').html("<strong>Activar Producto</strong> <%= @product.name.html_safe %>")
+    //Body
+    $(document.createElement('br')).appendTo("#bodyModalProductManager");
+    $(document.createElement('h6')).html('¿Esta seguro que quiere <strong>Activar</strong> este Producto?').appendTo("#bodyModalProductManager");
+    //Footer
+    btn =  '<%= link_to "Confirmar Cambio", activate_productmanager_path(@product), remote: true, method: :post, data: { disable_with: "Procesando..." }, class:"btn btn-success" %>'
+    $("#footerModalProductManager").html(btn)
+    $(document.createElement('button'))
+                                    .addClass("btn btn-primary")
+                                    .attr('id','btnProfileClose')
+                                    .attr('type','button')
+                                    .attr('data-dismiss','modal')
+                                    .text("Cancelar")
+                                    .appendTo("#footerModalProductManager");
+    $("#modalProductmanager").modal("show")
+    <% elsif @type == 'editar' %>
+        //Formulario
+        
+
+        $("#product_id").val("<%= @product.id %>")
+        $("#product_id").hide()
+        $("#product_names").val("<%= @product.name %>")
+        $("#product_descriptions").val("<%= @product.description %>")
+        $("#product_prices").val("<%= @product.price %>")
+        $("#product_skus").val("<%= @product.sku %>")
+        $('#product_availables').prop('checked',<%= @product.available %>);
+        $("#product_category_ids").val("<%= @product.category_id %>")
+        $("#product_model_product_ids").val("<%= @product.model_product_id %>")
+
+
+       $("#modalProductManagerEdit").modal("show")
+    
+    <% end %>
+
+

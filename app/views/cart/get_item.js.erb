@@ -1,0 +1,38 @@
+//limpiarCampos
+$('#modalCartComprasLabel').text("")
+$('#bodyModalCart').text("")
+$('#footerModalCart').text("")
+//Llenar campos
+
+    <% if @type == 'ver' %>
+    //Titulo
+    $(document.createElement('div')).html('<%= image_tag "https://img.ltwebstatic.com/images3_pi/2020/07/26/15957331228676c5f81f2660e395ec81d208e7d282_thumbnail_600x.webp", class:"w-25 h-25" %>').appendTo("#bodyModalOrder")
+                                                                .addClass("text-center mb-2")
+                                                                .appendTo("#bodyModalCart");
+    $(document.createElement('br')).appendTo("#bodyModalCart");
+    //Cuerpo
+    //Detalle
+
+    //Footer
+
+    <% elsif @type == 'quitar' %>
+    //Titulo
+    $('#modalCartComprasLabel').html("<strong>Producto :</strong> <%= @item.variant.product.name.html_safe %>")
+    //Detalle
+    $(document.createElement('h5')).html('¿Esta Seguro que quiere Eliminar producto del carro?').appendTo("#bodyModalCart")
+                                                                                            .addClass("text-center mb-2")
+                                                                                            .appendTo("#bodyModalCart");
+    //Footer
+    btn =  '<%= link_to "Confirmar", remove_cart_path(@item), remote: true, method: :delete, class:"btn btn-success" %>'
+    $("#footerModalCart").html(btn)
+    $(document.createElement('button'))
+                                            .addClass("btn btn-primary")
+                                            .attr('id','btnProfileClose')
+                                            .attr('type','button')
+                                            .attr('data-dismiss','modal')
+                                            .text("Volver")
+                                            .appendTo("#footerModalCart");
+    <% end %>
+
+
+$("#modalCartCompras").modal("show")

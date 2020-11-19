@@ -1,0 +1,15 @@
+
+<tr class="table-detail text-center">
+  <td><%= order.number %></td>
+  <td><%= order.created_at.strftime("%d-%m-%Y") %></td>
+  <td><%= order.created_at.strftime("%H:%M") %></td>
+  <td><%= number_to_currency(order.total,unit: '$', :precision => 0, format: "%u %n")  %></td>
+  <td><%= order.order_type.name %></td>
+  <td> En curso </td>
+  <td>
+      <%= link_to "Detalle Orden", get_order_info_path(order, "ver"), remote:true, class:"btn btn-success  btn-sm" %>
+  </td>
+  <td>
+      <%= link_to "Cancelar Orden", get_order_info_path(order, "cancelar"), remote:true,class:"btn btn-danger  btn-sm" %>
+  </td>
+</tr>

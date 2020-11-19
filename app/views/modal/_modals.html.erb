@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modal Profile administrador de perfiles-->
 <div class="modal fade" id="modalProfileDetail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalProfileDetailLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -13,6 +13,253 @@
       </div>
       <div class="modal-footer" id="footerModalProfile" >
         
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Gestor de compras-->
+<div class="modal fade" id="modalComprasDetail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalComprasDetailLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalComprasDetailLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalOrder">
+        
+      </div>
+      <div class="modal-footer" id="footerModalOrder" >
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Carro de Compras-->
+<div class="modal fade" id="modalCartCompras" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalCartComprasLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalCartComprasLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalCart">
+        
+      </div>
+      <div class="modal-footer" id="footerModalCart" >
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal producto-->
+<div class="modal fade" id="modalProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalProductLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h6 class="modal-title text-white" id="modalProductLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalProduct">
+        
+      </div>
+      <div class="modal-footer" id="footerModalProduct" >
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal administrador  producto-->
+<div class="modal fade" id="modalProductmanager" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalProductmanagerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalProductmanagerLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalProductManager">
+        
+      </div>
+      <div class="modal-footer" id="footerModalProductManager" >
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal administrador  producto nuevo-->
+<div class="modal fade" id="modalProductManagerNew" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalProductmanagerNewLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h6 class="modal-title text-white" id="modalProductmanagerNewLabel">Crear Nuevo Producto</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-devise" id="bodyModalProductManagerNew">
+        <% product = Product.new %>
+        <%= form_with model: product ,url: create_productmanager_path, remote: true do |form| %>
+          <% if product.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+              <ul>
+              <% product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= form.label :name, "Nombre" %>
+            <%= form.text_field :name, id: :product_name, class: "form-control" %>
+          </div>
+          
+          <div class="field">
+            <%= form.label :description, "Descripcion" %>
+            <%= form.text_area :description, id: :product_description, class: "form-control" %>
+          </div>
+          
+          <div class="field">
+            <%= form.label :price, "Precio" %>
+            <%= form.number_field :price, id: :product_price, class: "form-control" %>
+          </div>
+          <div class="field">
+            <%= form.label :sku, "SKU" %>
+            <%= form.text_field :sku, id: :product_sku, class: "form-control" %>
+          </div>
+          <br/>
+          <div class="field">
+            <%= form.label :available, "Producto disponible"%>
+            <%= form.check_box :available, id: :product_available, class: "" %>
+          </div>
+          
+          <div class="form-group">
+            <%= form.label :category_id, "Categoria" %>
+            <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, {} ,id: :product_category_id, include_blank:false, :class => "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= form.label :model_product_id, "Modelo" %>
+            <%= form.select :model_product_id, ModelProduct.all.collect {|mp| [mp.name, mp.id]}, {} ,id: :product_model_product_id, include_blank:false, :class => "form-control" %>
+          </div>
+          <br/>
+          <div class="field">
+            <%= form.label :front, "Adjunta foto principal" %>
+            <%= form.file_field :front,  id: :product_front%> 
+          </div>
+          <br/>
+          <div class="field">
+            <%= form.label :galery, "Adjunta fotos para galeria" %>
+            <%= form.file_field :galery, multiple: true %> 
+          </div>
+          <br/>
+          <div class="actions">
+            <%= form.submit "Crear Producto", class:"form-control btn btn-primary btn-lg btn-block" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer" id="footerModalProductManagerNew" >
+        <button type="button" class="form-control btn btn-danger btn-lg btn-block" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal administrador  producto Editar-->
+<div class="modal fade" id="modalProductManagerEdit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalProductManagerEditLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h6 class="modal-title text-white" id="modalProductManagerEditLabel">Editar Producto</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-devise" id="bodyModalProductManagerEdit">
+         <%= form_with model: product ,url: update_productmanager_path, remote: true do |form| %>
+          <% if product.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+              <ul>
+              <% product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field" id="idEditProduct">
+            
+            <%= form.text_field :id, id: :product_id, class: "form-control" %>
+          </div>
+
+          <div class="field">
+            <%= form.label :name, "Nombre" %>
+            <%= form.text_field :name, id: :product_names, class: "form-control" %>
+          </div>
+          
+          <div class="field">
+            <%= form.label :description, "Descripcion" %>
+            <%= form.text_area :description, id: :product_descriptions, class: "form-control" %>
+          </div>
+          
+          <div class="field">
+            <%= form.label :price, "Precio" %>
+            <%= form.number_field :price, id: :product_prices, class: "form-control" %>
+          </div>
+          <div class="field">
+            <%= form.label :sku, "SKU" %>
+            <%= form.text_field :sku, id: :product_skus, class: "form-control" %>
+          </div>
+          <br/>
+          <div class="field">
+            <%= form.label :available, "Producto disponible"%>
+            <%= form.check_box :available, id: :product_availables, class: "" %>
+          </div>
+          
+          <div class="form-group">
+            <%= form.label :category_id, "Categoria" %>
+            <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, {} ,id: :product_category_ids, include_blank:false, :class => "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= form.label :model_product_id, "Modelo" %>
+            <%= form.select :model_product_id, ModelProduct.all.collect {|mp| [mp.name, mp.id]}, {} ,id: :product_model_product_ids, include_blank:false, :class => "form-control" %>
+          </div>
+          <br/>
+          <div class="field">
+            <%= form.label :front, "Adjunta foto principal" %>
+            <%= form.file_field :front,  id: :product_front%> 
+          </div>
+          <br/>
+          <div class="field">
+            <%= form.label :galery, "Adjunta fotos para galeria" %>
+            <%= form.file_field :galery, multiple: true %> 
+          </div>
+          <br/>
+          <div class="actions">
+            <%= form.submit "Editar Producto", class:"form-control btn btn-primary btn-lg btn-block" %>
+          </div>
+        <% end %>
+	      
+      </div>
+      <div class="modal-footer" id="footerModalProductManagerEdit" >
+        <button type="button" class="form-control btn btn-danger btn-lg btn-block" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

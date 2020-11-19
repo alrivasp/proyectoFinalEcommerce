@@ -1,0 +1,26 @@
+  <tr class="table-detail text-center">
+    <td><%= product.sku %></td>
+    <td><%= product.name %></td>
+    <td><%= product.description %></td>
+    <td><%= number_to_currency(product.price,unit: '$', :precision => 0, format: "%u %n") %></td>
+    <td><%= product.category.name %></td>
+    <td><%= product.model_product.name %>
+    <td><%= product.model_product.mark.name %>
+    <td>
+        <% product.variants.each do |variant| %>
+            Talla: <%= variant.size_product.name %>
+            Stock: <%= variant.stock %>
+            <br>
+        <% end%>
+    </td>
+    <td>
+      <%= link_to "Ver ", get_productmanager_info_path(product, 'ver'), remote:true, class:"btn btn-success  btn-sm" %>
+      <%= link_to "Editar", get_productmanager_info_path(product, 'editar'), remote:true, class:"btn btn-warning  btn-sm" %>
+      <% if product.available == true %>
+        <%= link_to "Desactivar", get_productmanager_info_path(product, 'desactivar'), remote:true, class:"btn btn-danger  btn-sm" %>
+      <% else %>
+        <%= link_to "Activar", get_productmanager_info_path(product, 'activar'), remote:true, class:"btn btn-danger  btn-sm" %>
+      <% end %>
+    </td>
+
+  </tr>

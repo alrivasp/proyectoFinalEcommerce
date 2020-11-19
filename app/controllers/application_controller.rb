@@ -28,13 +28,15 @@ class ApplicationController < ActionController::Base
             format.js   { head :forbidden, content_type: 'text/html' }
         end
     end
-    def after_sign_in_path_for(resource) 
+
+    def after_sign_in_path_for(resource)
 
         if current_user.permission_level == 1
             accounts_dashboard_admin_path
         else
             accounts_dashboard_user_path
         end
-  
+
     end
+
 end

@@ -24,19 +24,21 @@
             <% if current_user.permission_level == 0%>
               <!--Accesos Usuarios-->
               <%= link_to "<li><span class='lnr lnr-user icon1'></span><h4 class='text1'>Mi Perfil</h4></li>".html_safe, edit_user_registration_path %>
-
-
-              <li><span class="lnr lnr-list icon2"></span><h4 class="text2">Mis Compras</h4></li>
-              <li><span class="lnr lnr-cart icon3"></span><h4 class="text3">Mi Carro</h4></li>
+              <%= link_to "<li><span class='lnr lnr-list icon2'></span><h4 class='text1'>Mis Compras</h4></li>".html_safe, shopping_main_path%>
+              <%= link_to "<li><span class='lnr lnr-cart icon2'></span><h4 class='text1'>Mi Carro</h4></li>".html_safe, cart_main_path%>
+              
+              
               <li><span class="lnr lnr-bubble icon4"></span><h4 class="text4">Mensaje</h4></li>
               <%= link_to "<li><span class='lnr lnr-power-switch icon5'></span><h4 class='text1'>Cerras Sesion</h4></li>".html_safe, destroy_user_session_path, method: :delete %>
             <% else %>
               <!--Accesos Administradores-->
               <%= link_to "<li><span class='lnr lnr-user icon1'></span><h4 class='text1'>Mi Perfil</h4></li>".html_safe, edit_user_registration_path %>
               <%= link_to "<li><span class='lnr lnr-users icon1'></span><h4 class='text1'>Administrar Perfiles</h4></li>".html_safe, manager_profile_path %>
-              
+              <li><span class="lnr lnr-inbox icon1"></span><h4 class="text1">Gestion de Ordenes de Compra</h4></li>
               <li><span class="lnr lnr-download icon1"></span><h4 class="text1">Ingreso Mercaderia</h4></li>
-              <li><span class="lnr lnr-store icon1"></span><h4 class="text1">Administrar Productos</h4></li>
+              
+              <%= link_to "<li><span class='lnr lnr-store icon1'></span><h4 class='text1'>Administrar Productos</h4></li>".html_safe, productmanager_main_path %>
+              
               <li><span class="lnr lnr-briefcase icon1"></span><h4 class="text1">Provedores</h4></li>
               <li><span class="lnr lnr-chart-bars icon1"></span><h4 class="text1">Dashboard</h4></li>
               <li><span class="lnr lnr-bubble icon4"></span><h4 class="text4">Mensajes</h4></li>
@@ -46,8 +48,8 @@
       </nav>
       <!-- Page Content Holder -->
       <div id="content">
-          <div class="yield-contenido container shadow-red rounded">
-          <%= yield %>
+          <div class="yield-contenido  shadow-red rounded">
+            <%= yield %>
           </div>
       </div>
     </div>

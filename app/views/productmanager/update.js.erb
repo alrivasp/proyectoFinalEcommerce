@@ -1,0 +1,16 @@
+$("#product_names").val("")
+$("#product_descriptions").val("")
+$("#product_prices").val("")
+$("#product_skus").val("")
+$('#product_availables').prop('checked',false);
+$("#product_category_ids").val("")
+$("#product_model_product_ids").val("")
+
+<% @products = @products_inactive %>
+$("#products_List_inactive").html("");
+$("#products_List_inactive").html(" <%= j render partial: 'product', collection: @products %>");
+<% @products = @products_active %>
+$("#products_List_active").html("");
+$("#products_List_active").html(" <%= j render partial: 'product', collection: @products %>");
+
+$("#modalProductManagerEdit").modal("hide")

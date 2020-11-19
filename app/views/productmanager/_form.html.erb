@@ -1,0 +1,48 @@
+<% product = Product.new %>
+<%= form_with model: product ,url: create_productmanager_path, remote: true do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, "Nombre" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, "Descripcion" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price, "Precio" %>
+    <%= form.number_field :price, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available, "Producto disponible"%>
+    <%= form.check_box :available, class: "" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :front, "Adjunta foto principal" %>
+    <%= form.file_field :front %> 
+  </div>
+
+  <div class="field">
+    <%= form.label :galery, "Adjunta foto para galeria" %>
+    <%= form.file_field :galery, multiple: true %> 
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Crear Producto", class:"form-control btn btn-primary btn-lg btn-block" %>
+  </div>
+<% end %>

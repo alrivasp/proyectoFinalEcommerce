@@ -1,0 +1,17 @@
+.bg-product{
+   
+}
+.card-product{
+    transition: 1s;
+    border-radius: 20px !important; 
+    background: rgb(0,212,255);
+    background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(0,240,74,1) 100%);
+}
+
+.card-product:hover{
+    -webkit-box-shadow: 2px -4px 53px -13px rgba(5,5,2,1) !important;
+    -moz-box-shadow: 2px -4px 53px -13px rgb(5, 5, 2) !important;
+    box-shadow: 2px -4px 53px -13px rgba(5,5,2,1) !important;
+    transform: scale(1.1); /* (150% zoom)*/
+
+}

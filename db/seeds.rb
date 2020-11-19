@@ -558,3 +558,62 @@ SizeProduct.create(
     size_type_id: 2
 )
 puts ("Se crean Tallas En numeros y letras")
+
+#Type Order
+OrderType.create(
+    name: "Contra Entrega",
+    description: "Se le entraga producto a cliente en su domicilio (Coquimbo o La Serena) y se paga el producto"
+)
+
+OrderType.create(
+    name: "Despacho a Regiones",
+    description: "Se le envia el producto al cliente por Pullman Cargo previo pago del producto y el cliente paga al provvedor de transporte"
+)
+puts ("Se crean Tipos de Orden")
+
+
+#Type status order
+
+OrderStatus.create(
+    name: "En Curso",
+    description: "Cliente esta comprando y agregando prodyctos al carro",
+    type_order: 3
+)
+
+OrderStatus.create(
+    name: "Pendiente de Contra entrega",
+    description: "Cliente Completa el carro pero esta pendiente Entrega y pago",
+    type_order: 1
+)
+
+OrderStatus.create(
+    name: "Pendiente de Envio por Pago",
+    description: "Cliente Completa el carro pero esta pendiente ya que el pago de la orde",
+    type_order: 2
+)
+
+OrderStatus.create(
+    name: "Pendiente de Envio",
+    description: "Cliente Completa el carro pero esta pendiente ya que no se ha enviado al proveedor de transporte",
+    type_order: 2
+)
+
+OrderStatus.create(
+    name: "Pendiente de Entrega",
+    description: "Se entrego producto al proveedor prducto se encuentra en camino",
+    type_order: 2
+)
+
+OrderStatus.create(
+    name: "Cancelado por Cliente",
+    description: "Cliente Cancela Orden",
+    type_order: 3
+)
+
+OrderStatus.create(
+    name: "Cancelado por Administrador",
+    description: "Administrador Cancela Orden",
+    type_order: 3
+)
+
+puts ("Se crean Estados de orden")

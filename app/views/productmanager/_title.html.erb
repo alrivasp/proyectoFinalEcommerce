@@ -1,0 +1,5 @@
+<div>
+    <%= link_to "Agregar Producto", create_productmanager_path(@product), "data-toggle" => "modal", "data-target" => "#modalProductManagerNew", class:"btn btn-success"%>
+    <%= link_to "Productos Activos", productmanager_active_products_path, class:"btn btn-primary"%>
+    <%= link_to "Productos Inactivos", productmanager_inactive_products_path, class:"btn btn-primary"%>
+</div>

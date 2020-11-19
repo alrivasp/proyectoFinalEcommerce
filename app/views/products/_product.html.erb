@@ -1,0 +1,26 @@
+<div class="col-auto">
+    <!--Crad Producto-->
+    <div class="card-product ml-1 mr-1 mt-3 mb-3 shadow">
+        <div class="card flip-card " style="width: 20rem;">
+            <!--Foto Producto-->
+            <img src="..." class="card-img-top" alt="...">
+            <!--Cuerpo card-->
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text"><%= product.description %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Tallas:</li>
+              <li class="list-group-item">Marca: <%= product.model_product.mark.name %></li>
+              <li class="list-group-item">Modelo: <%= product.model_product.name %></li>
+            </ul>
+            <!--Footer Card-->
+            <div class="card-body">
+              <%= link_to "Detalle", get_product_info_path(product, 'ver'), remote: true, class:"btn btn-primary float-right ml-1" %>
+              <%= link_to "<i class='fa fa-cart-plus' aria-hidden='true'> Agregar</i>".html_safe, root_path, class:"btn btn-success float-right" %>
+            </div>
+        </div>
+    </div>
+    <!-- FIn Card Producto-->
+</div>
+

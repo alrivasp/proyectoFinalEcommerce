@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_193028) do
+ActiveRecord::Schema.define(version: 2020_11_15_153111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,53 @@ ActiveRecord::Schema.define(version: 2020_11_09_193028) do
     t.index ["mark_id"], name: "index_model_products_on_mark_id"
   end
 
+  create_table "order_histories", force: :cascade do |t|
+    t.text "description"
+    t.bigint "order_id"
+    t.bigint "order_status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_histories_on_order_id"
+    t.index ["order_status_id"], name: "index_order_histories_on_order_status_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "price"
+    t.bigint "variant_id"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["variant_id"], name: "index_order_items_on_variant_id"
+  end
+
+  create_table "order_statuses", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "type_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_types", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "number"
+    t.integer "total"
+    t.bigint "user_id"
+    t.bigint "order_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_type_id"], name: "index_orders_on_order_type_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -75,6 +122,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_193028) do
     t.bigint "model_product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sku"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["model_product_id"], name: "index_products_on_model_product_id"
   end
@@ -159,6 +207,12 @@ ActiveRecord::Schema.define(version: 2020_11_09_193028) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "communes", "provinces"
   add_foreign_key "model_products", "marks"
+  add_foreign_key "order_histories", "order_statuses"
+  add_foreign_key "order_histories", "orders"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "variants"
+  add_foreign_key "orders", "order_types"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "model_products"
   add_foreign_key "provinces", "regions"

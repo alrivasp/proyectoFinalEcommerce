@@ -1,0 +1,43 @@
+//limpiarCampos
+$('#modalProductLabel').text("")
+$('#bodyModalProduct').text("")
+$('#footerModalProduct').text("")
+//Llenar campos
+
+    <% if @type == 'ver' %>
+    //Titulo
+    $('#modalProductLabel').html("<strong> <%= @product.name.html_safe %>  </strong>")
+    //Cuerpo
+    $(document.createElement('div')).html("<%= j render 'detailProduct' %>").appendTo("#bodyModalProduct");
+
+    $(document.createElement('h1')).html("<%= @product.name.html_safe %>").appendTo("#bodyProduct");
+    $(document.createElement('br')).appendTo("#bodyProduct");
+    $(document.createElement('p')).html("<strong>Descripcion:</strong><%= @product.description.html_safe %>").appendTo("#bodyProduct");
+    $(document.createElement('p')).html("<strong>Modelo:</strong><%= @product.model_product.name.html_safe %>").appendTo("#bodyProduct");
+    $(document.createElement('p')).html("<strong>Marca:</strong><%= @product.model_product.mark.name.html_safe %>").appendTo("#bodyProduct");
+    $(document.createElement('p')).html("<strong>Categoria:</strong><%= @product.category.name.html_safe %>").appendTo("#bodyProduct");
+        
+    <% @variants.each do |variant|%>
+        $(document.createElement('span')).html("<strong>Stock:</strong><%= variant.stock %>").appendTo("#bodyProduct");
+        $(document.createElement('i')).html("      ").appendTo("#bodyProduct");
+        $(document.createElement('i')).html("<strong>Talla:</strong> <%= variant.size_product.name %>").appendTo("#bodyProduct");
+        $(document.createElement('br')).appendTo("#bodyProduct");
+    <% end %>
+    $(document.createElement('br')).appendTo("#bodyProduct");
+    $(document.createElement('h2')).html("<strong>Total: </strong><%= number_to_currency(@product.price ,unit: '$', :precision => 0, format: '%u %n') %>").appendTo("#bodyProduct");
+    $(document.createElement('p')).html("<strong>Popularidad: </strong>").appendTo("#bodyProduct");
+    $(document.createElement('span')).html("<strong>Agrege una Nota para este Producto: </strong><select name='points'><option>1</option><option>2</option>3<option>4</option><option>5</option></select> ").appendTo("#bodyProduct");
+    
+    //Footer
+    
+    <% elsif @type == 'cancelar' %>
+    //Titulo
+   
+    //Body
+    
+    //Footer
+   
+    <% end %>
+
+
+$("#modalProduct").modal("show")

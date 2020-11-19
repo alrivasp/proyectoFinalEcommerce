@@ -1,0 +1,16 @@
+  <tr class="table-detail text-center">
+    <td><%= item.order.number %></td>
+    <td><%= item.variant.product.name %></td>
+    <td><%= item.variant.product.category.name %></td>
+    <td><%= item.variant.product.model_product.mark.name %></td>
+    <td><%= item.variant.product.model_product.name %></td>
+    <td><%= item.variant.size_product.name %></td>
+    <td><%= item.quantity %></td>
+    <td><%= number_to_currency(item.price ,unit: '$', :precision => 0, format: "%u %n")  %></td>
+    <td>
+        <%= link_to "Detalle Producto", get_item_info_path(item, "ver"), remote:true, class:"btn btn-success  btn-sm" %>
+    </td>
+    <td>
+        <%= link_to "Quitar Producto", get_item_info_path(item, "quitar"), remote:true,class:"btn btn-danger  btn-sm" %>
+    </td>
+  </tr>
