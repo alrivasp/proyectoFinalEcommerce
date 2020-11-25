@@ -1,0 +1,18 @@
+
+//limpiar modal Crear
+$("#variant_id_edit").val('');
+$("#product_category_id_variant_update").val('');
+$("#stock_variant_update").val('');
+$("#size_product_id_variant_update").val('');
+
+//recargar listas
+<% @products = @products_inactive %>
+$("#products_List_inactive").html("");
+$("#products_List_inactive").html(" <%= j render partial: 'product', collection: @products %>");
+<% @products = @products_active %>
+$("#products_List_active").html("");
+$("#products_List_active").html(" <%= j render partial: 'product', collection: @products %>");
+$("#products_List_variant").html("");
+$("#products_List_variant").html(" <%= j render partial: 'variant', collection: @variants %>");
+
+$("#modalVariantProductManagerEdit").modal("hide");

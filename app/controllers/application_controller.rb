@@ -39,4 +39,20 @@ class ApplicationController < ActionController::Base
 
     end
 
+    def current_order
+        #Valida si Usuario esta Logeado
+        if current_user
+            #Buscar ordenes del usuario actual
+            orders = Order.where(user_id: currente_user.id)
+            #verificar ultima order history si estado es en curso (FK 1) pasar como orden actual
+            orders.each do |order|
+                temp = OrderHistory.where(order_id: order.id).order(created_at: :desc).first
+                if temp.order_status_id == 1 # status en curso
+                    return order
+                end
+            end
+        end
+        return nil
+    end
+
 end

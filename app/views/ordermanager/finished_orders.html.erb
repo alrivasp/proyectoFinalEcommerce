@@ -1,0 +1,33 @@
+<div class="p-4">
+    <h2 class="text-center">Ordenes(OC) Finalizadas</h2>
+    <%= render partial: 'title'%>
+    <!--Buscador-->
+    <div class=" w-25 mt-3 mb-3 ">
+        <%= form_tag( search_finished_ordermanager_path, method: "get", remote: true, class:"d-flex input-group w-auto", id: :form_active_search) do %>
+            <%= text_field_tag :search, params[:search] , placeholder:"Buscar Orden de Compra (OC)...", class:"form-control rounded-pill shadow", "aria-label" => "Search",id: :input_search_active %><i class="fa fa-search fa-2x ml-2 mr-2 text-primary" aria-hidden="true"></i>
+	    	<%= submit_tag "Buscar", class:"btn btn-outline-primary btn-search-pm", "data-ripple-color" => "dark", id: :submit_search_active %>
+	    <% end %>
+    </div>
+    <!--Buscador-->
+    <div class="mt-4">
+         <div>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr class="table-header text-center">
+                        <th scope="col">OC</th>
+                        <th scope="col">Tipo de Orden</th>
+                        <th scope="col">Fecha Creacion</th>
+                        <th scope="col">Hora Creacion</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="order_List_finished">
+                    <%= render partial: "order", collection: @orders %>
+                </tbody>
+            </table>
+        <div>
+    </div>
+</div>

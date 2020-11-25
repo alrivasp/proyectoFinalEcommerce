@@ -1,0 +1,46 @@
+<% if @type == 'editar'%>
+    //Formulario
+    $("#variant_id_edit").val("<%= @variant.id %>")
+    $("#field_variant_id_edit").hide()
+    $("#product_category_id_variant_update").val(<%= @variant.product_id %>);
+    $("#stock_variant_update").val("<%= @variant.stock %>")
+    $("#size_product_id_variant_update").val(<%= @variant.size_product_id %>);
+
+    $("#modalVariantProductManagerEdit").modal("show")
+<% elsif @type == 'ver' %>
+                //Titulo
+        $('#modalProductmanagerLabel').html("<strong> <%= @product.name.html_safe %>  </strong>")
+        //Cuerpo
+        $(document.createElement('div')).html("<%= j render 'detailProduct' %>").appendTo("#bodyModalProductManager");
+
+        $(document.createElement('h1')).html("<%= @product.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('br')).appendTo("#bodyProductManager");
+        <% if @product.front.attached? %>
+            img =  '<%= image_tag  @product.front.variant(resize: "400x500"), class:"" %>'
+            $("#photoFrontProduct").html(img)
+        <% else %>
+            img = '<%= image_tag("photo-default", class:"photo-default" )%>'
+            $("#photoFrontProduct").html(img)
+        <% end  %>
+        $(document.createElement('p')).html("<strong>Descripcion:</strong><%= @product.description.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Modelo:</strong><%= @product.model_product.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Marca:</strong><%= @product.model_product.mark.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Categoria:</strong><%= @product.category.name.html_safe %>").appendTo("#bodyProductManager");
+    <% @variants.each do |variant|%>
+        $(document.createElement('span')).html("<strong>Stock:</strong><%= variant.stock %>").appendTo("#bodyProductManager");
+        $(document.createElement('i')).html("      ").appendTo("#bodyProductManager");
+        $(document.createElement('i')).html("<strong>Talla:</strong> <%= variant.size_product.name %>").appendTo("#bodyProductManager");
+        $(document.createElement('br')).appendTo("#bodyProductManager");
+    <% end %>
+    $(document.createElement('br')).appendTo("#bodyProductManager");
+    $(document.createElement('h2')).html("<strong>Precio: </strong><%= number_to_currency(@product.price ,unit: '$', :precision => 0, format: '%u %n') %>").appendTo("#bodyProductManager");
+    //footer
+    $(document.createElement('button'))
+                                    .addClass("btn btn-primary")
+                                    .attr('id','btnProfileClose')
+                                    .attr('type','button')
+                                    .attr('data-dismiss','modal')
+                                    .text("Cerrar")
+                                    .appendTo("#footerModalProductManager");
+    $("#modalProductmanager").modal("show")
+<% end %>

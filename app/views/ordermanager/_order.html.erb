@@ -1,0 +1,19 @@
+<tr class="table-detail text-center">
+  <td class="align-middle"><%= order.order.number %></td>
+  <td class="align-middle"><%= order.order.order_type.name %></td>
+  <td class="align-middle"><%= order.order.created_at.strftime("%d-%m-%Y") %></td>
+  <td class="align-middle"><%= order.order.created_at.strftime("%H:%M") %></td>
+  <td class="align-middle"><%= order.order.user.user_name %></td>
+  <td class="align-middle"><%= number_to_currency(order.order.total ,unit: '$', :precision => 0, format: "%u %n") %></td>
+  <td class="align-middle"><%= order.order_status.name %></td>
+  <td class="align-middle">
+    <%= link_to "Ver OC", get_ordermanager_info_path(order.order, 'ver'), remote:true, class:"btn btn-success  btn-sm" %>
+    <%= link_to "Historia OC", get_ordermanager_info_path(order.order, 'historia'), remote:true, class:"btn btn-success  btn-sm" %>
+    
+    <% if order.order_status_id == 1 %>
+      <%= link_to "Cancelar OC", get_ordermanager_info_path(order.order, 'cancel'), remote:true, class:"btn btn-danger btn-sm" %>
+    <% elsif order.order_status_id == 2 || order.order_status_id == 3 || order.order_status_id == 4 || order.order_status_id == 5 %>
+      <%= link_to "Cambiar estado de  OC", get_ordermanager_info_path(order.order, 'cambio'), remote:true, class:"btn btn-danger btn-sm" %>
+    <% end %>
+  </td>
+</tr>

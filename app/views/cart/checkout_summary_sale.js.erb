@@ -1,0 +1,54 @@
+//limpiarCampos
+$('#modalCartCheckOutSummaryOrderLabel').text("")
+$('#footerModalCartCheckOutSummaryOrder').text("")
+
+$('#summary_name').text("")
+$('#summary_dni').text("")
+$('#summary_adress').text("")
+$('#summary_cummune').text("")
+$('#summary_province').text("")
+$('#summary_region').text("")
+
+$('#summary_oc').text("")
+$('#summary_td').text("")
+$('#product_space').text("")
+$('#summary_products').text("")
+$('#summary_total').text("")
+$('#summary_tp').text("")
+
+$('#payment_method_id').val("")
+//Titulo
+$('#modalCartCheckOutSummaryOrderLabel').html("<strong>Paso 4 - Resumen de Orden</strong>")
+
+//contenido
+<% @order.order_items.count do |item| %>
+    $(document.createElement('br')).appendTo("#product_space");
+<% end%>
+
+
+$('#summary_name').html("<%= @order.user.name %> <%= @order.user.last_name %>")
+$('#summary_dni').html("<%= @order.user.rut %>")
+$('#summary_adress').html("<%= @order.user.street %>")
+$('#summary_cummune').html("<%= @order.user.commune.name %>")
+$('#summary_province').html("<%= @order.user.commune.province.name %>")
+$('#summary_region').html("<%= @order.user.commune.province.region.name %>")
+
+$('#summary_oc').html("<%= @order.number %>")
+$('#summary_td').html("<%= @order.order_type.name %>")
+$(document.createElement('br')).appendTo("#summary_products");
+<% @order.order_items.count do |item| %>
+    $(document.createElement('div')).html("<%= item.variant.product.name %> | <%= item.variant.product.model_product.name %>  |  Cantidad: 1 ").appendTo("#summary_products");
+<% end%>
+$('#summary_total').html("<%= number_to_currency(@order.total ,unit: '$', :precision => 0, format: "%u %n") %>")
+$('#summary_tp').html("<%= @pm.name %>")
+
+<% if @pm.id == 1 || @pm.id == 2 %>
+    btn =  '<%= link_to "$ COMPRAR", checkout_end_sale_cart_path(@pm), remote: true, method: :post, class:"btn btn-primary btn-lg btn-block", data: {disable_with: "Terminando Orden de Compra..."} %>'
+    $("#footerModalCartCheckOutSummaryOrder").html(btn)
+<% else %>
+    btn =  '<%= link_to "Pagar via PayPal", checkout_paypal_sale_cart_path(@pm), remote: true, method: :post, class:"btn btn-primary btn-lg btn-block", data: {disable_with: "Direccionando a Paypal..."} %>'
+    $("#footerModalCartCheckOutSummaryOrder").html(btn)
+<% end %>
+
+$('#modalCartCheckOutPayOrder').modal("hide")
+$('#modalCartCheckOutSummaryOrder').modal("show")

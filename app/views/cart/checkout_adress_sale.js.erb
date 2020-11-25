@@ -1,0 +1,36 @@
+//limpiar
+$('#modalCartCheckOutLabel').text("")
+$('#bodyModalCartCheckOut').text("")
+$('#footerModalCartCheckOut').text("")
+//modifico
+$('#modalCartCheckOutLabel').html("Paso 1 - Verificacion de Direccion" )
+<% if @user.street == "" %>
+    $(document.createElement('h6')).html("Estimado su direccion esta incompleta necesitamos ingrese su direccion exacta.-").appendTo("#bodyModalCartCheckOut");
+    $(document.createElement('button'))
+                                    .addClass("btn btn-primary")
+                                    .attr('id','btnProfileClose')
+                                    .attr('type','button')
+                                    .attr('data-dismiss','modal')
+                                    .text("Cancelar")
+                                    .appendTo("#footerModalCartCheckOut");
+<% elsif @user.commune_id == "" %>
+    $(document.createElement('h6')).html("Estimado su Comuna no esta ingresada necesitamos ingrese su Comuna.-").appendTo("#bodyModalCartCheckOut");
+    $(document.createElement('button'))
+                                    .addClass("btn btn-primary")
+                                    .attr('id','btnProfileClose')
+                                    .attr('type','button')
+                                    .attr('data-dismiss','modal')
+                                    .text("Cancelar")
+                                    .appendTo("#footerModalCartCheckOut");
+<% else %>
+    $(document.createElement('h5')).addClass("text-center")
+                                   .html("Direccion Registrada").appendTo("#bodyModalCartCheckOut");
+    $(document.createElement('h6')).html("Direccion: <%= @user.street %>").appendTo("#bodyModalCartCheckOut");
+    $(document.createElement('h6')).html("Comuna: <%= @user.commune.name %>").appendTo("#bodyModalCartCheckOut");
+    $(document.createElement('h6')).html("Provincia: <%= @user.commune.province.name %>").appendTo("#bodyModalCartCheckOut");
+    $(document.createElement('h6')).html("Region: <%= @user.commune.province.region.name %>").appendTo("#bodyModalCartCheckOut");
+     btn =  '<%= link_to "Siguiente", checkout_type_sale_cart_path, remote: true, method: :get, class:"btn btn-success", data: {disable_with: "Procesando Compra..."} %>'
+    $("#footerModalCartCheckOut").html(btn)
+<% end %>
+
+$("#modalCartCheckOut").modal("show")

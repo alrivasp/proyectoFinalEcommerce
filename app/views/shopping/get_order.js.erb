@@ -28,6 +28,7 @@ $('#footerModalOrder').text("")
                                             .attr('data-dismiss','modal')
                                             .text("Cerrar")
                                             .appendTo("#footerModalOrder");
+        $("#modalComprasDetail").modal("show")
     <% elsif @type == 'cancelar' %>
     //Titulo
     $('#modalComprasDetailLabel').html("Cancelar <strong>Orden N°:</strong> <%= @order.number.html_safe %>")
@@ -47,8 +48,44 @@ $('#footerModalOrder').text("")
                                             .attr('data-dismiss','modal')
                                             .text("Volver")
                                             .appendTo("#footerModalOrder");
+    $("#modalComprasDetail").modal("show")
+    <% elsif @type == 'historia' %>
+         //limpiar
+    $('#modalOderManagerHistorylLabel').text("")
+    $('#titleBodyOrderManagerHistory').text("")
+    $('#detailTableOrderManagerHistory').text("")
+    //Titulo modal
+    $('#modalOderManagerHistorylLabel').html("<strong>Historial de Orden N° <%= @order.number.html_safe %>  </strong>")
+
+    //Cuerpo
+    $(document.createElement('h5')).addClass("text-center")
+                                    .html('<strong>Historial de OC</strong>').appendTo("#titleBodyOrderManagerHistory");
+    //Tabla
+    $('#detailTableOrderManagerDetail').text("")
+    <% @order_histories.each_with_index do |oh, index|%>
+        <% if index == 0 %>
+            $(document.createElement('tr')).attr("id","colModalOrderHistoryTable-<%= index %>").appendTo("#detailTableOrderManagerHistory");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.order.number %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.order.order_type.name %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.created_at.strftime("%d-%m-%Y") %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.created_at.strftime("%H:%M") %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.description %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.order_status.name %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+        <% else %>
+            $(document.createElement('tr')).addClass("border-primary").attr("id","colModalOrderHistoryTable-<%= index %>").appendTo("#detailTableOrderManagerHistory");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.order.number %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.order.order_type.name %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.created_at.strftime("%d-%m-%Y") %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.created_at.strftime("%H:%M") %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.description %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.order_status.name %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+        <% end %>
+    <% end %>
+    
+    //Up modal
+    $("#modalOderManagerHistory").modal("show")
     <% end %>
 
 
-$("#modalComprasDetail").modal("show")
+
 

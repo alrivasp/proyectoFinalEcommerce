@@ -14,6 +14,7 @@ font-family: 'Source Sans Pro', sans-serif;
 font-family: 'Work Sans', sans-serif;
 */
 
+
 body{
   font-family: 'Oswald', sans-serif;
     background: url("textura_jeans.jpg")no-repeat center center fixed;
@@ -441,4 +442,12 @@ margin-left: -350px;
 
 .icon{
   width: 200px;
+}
+
+.item {
+  vertical-align: center
+}
+
+.btn-search-pm{
+  display: none;
 }

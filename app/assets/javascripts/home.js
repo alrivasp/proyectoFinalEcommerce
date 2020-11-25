@@ -35,6 +35,17 @@ document.addEventListener('turbolinks:load', function(){
             show = 1;
         }
     })
-    //
-
+    
+    //search active
+    $( "#input_search_active" ).keyup(function(){
+        $("#submit_search_active").trigger("click");
+    })
+    //search inactive
+    $( "#input_search_inactive" ).keyup(function(){
+        $("#submit_search_inactive").trigger("click");
+    })
+    //search variant
+    $( "#input_search_variant" ).keyup(function(){
+        $("#submit_search_variant").trigger("click");
+    })
 })

@@ -1,19 +1,19 @@
   <tr class="table-detail text-center">
-    <td><%= product.sku %></td>
-    <td><%= product.name %></td>
-    <td><%= product.description %></td>
-    <td><%= number_to_currency(product.price,unit: '$', :precision => 0, format: "%u %n") %></td>
-    <td><%= product.category.name %></td>
-    <td><%= product.model_product.name %>
-    <td><%= product.model_product.mark.name %>
-    <td>
+    <td class="align-middle"><%= product.sku %></td>
+    <td class="align-middle"><%= product.name %></td>
+    <td class="align-middle"><%= product.description %></td>
+    <td class="align-middle"><%= number_to_currency(product.price,unit: '$', :precision => 0, format: "%u %n") %></td>
+    <td class="align-middle"><%= product.category.name %></td>
+    <td class="align-middle"><%= product.model_product.name %></td>
+    <td class="align-middle"><%= product.model_product.mark.name %></td>
+    <td class="align-middle">
         <% product.variants.each do |variant| %>
             Talla: <%= variant.size_product.name %>
             Stock: <%= variant.stock %>
             <br>
         <% end%>
     </td>
-    <td>
+    <td class="align-middle">
       <%= link_to "Ver ", get_productmanager_info_path(product, 'ver'), remote:true, class:"btn btn-success  btn-sm" %>
       <%= link_to "Editar", get_productmanager_info_path(product, 'editar'), remote:true, class:"btn btn-warning  btn-sm" %>
       <% if product.available == true %>

@@ -1,0 +1,18 @@
+<div class="p-4">
+    <h2 class="text-center title-ppal">Administrador de Ordenes de Compra</h2>
+    <%= render partial: 'title'%>
+    <div class="mt-4">
+        <div class="jumbotron jumbotron-fluid bg-light">
+            <div class="row  justify-content-md-center">
+                <div class="col-7 text-center"> 
+                    <h1 class="display-6 ">Hola <%= current_user.user_name%></h1>
+                    <p class="lead">Administra las Ordenes de Compra y el estado de los pedidos.</p>
+                    <%= image_tag "jls_logo_", class:"icon ",id:"icon" %>
+                </div>
+                <div  class="col-5 text-center">
+                    <%= image_tag "jeans-group", class:" w-100 float-right" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

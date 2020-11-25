@@ -1,0 +1,16 @@
+  <tr class="table-detail text-center">
+    <td class="align-middle"><%= variant.product.sku %></td>
+    <td class="align-middle"><%= variant.product.name %></td>
+    <td class="align-middle"><%= variant.product.description %></td>
+    <td class="align-middle"><%= number_to_currency(variant.product.price,unit: '$', :precision => 0, format: "%u %n") %></td>
+    <td class="align-middle"><%= variant.product.category.name %></td>
+    <td class="align-middle"><%= variant.product.model_product.name %></td>
+    <td class="align-middle"><%= variant.product.model_product.mark.name %></td>
+    <td class="align-middle"><%= variant.size_product.name%></td>
+    <td class="align-middle"><%= variant.stock %></td>
+    <td class="align-middle">
+      <%= link_to "Ver ", get_variant_productmanager_info_path(variant, 'ver'), remote:true, class:"btn btn-success  btn-sm" %>
+      <%= link_to "Editar", get_variant_productmanager_info_path(variant, 'editar'), remote:true, class:"btn btn-warning  btn-sm" %>
+    </td>
+
+  </tr>

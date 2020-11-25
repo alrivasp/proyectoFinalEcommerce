@@ -1,0 +1,36 @@
+
+<% if @flag %>
+    //Fallo y lanza Modal
+    //limpiar modal mensaje
+    $("#modalMessageErrorLabel").text('');
+    $("#modalBodyMessageError").text('');
+    //Titulo
+    $('#modalProductmanagerLabel').html("<strong><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Falla </strong> ").appendTo("#modalMessageErrorLabel");
+    //Body
+    $(document.createElement('h6')).html("<%= @message.html_safe %>").appendTo("#modalBodyMessageError");
+    //Mostrar Modal
+    $("#modalMessageError").modal("show");
+    //limpiar modal Crear
+    $("#product_category_id_variant_create").val('');
+    $("#stock_variant_create").val('');
+    $("#size_product_id_variant_create").val('');
+<% else %>
+    //Correcto 
+    //limpiar modal Crear
+    $("#product_category_id_variant_create").val('');
+    $("#stock_variant_create").val('');
+    $("#size_product_id_variant_create").val('');
+    //recargar listas
+    <% @products = @products_inactive %>
+    $("#products_List_inactive").html("");
+    $("#products_List_inactive").html(" <%= j render partial: 'product', collection: @products %>");
+
+    <% @products = @products_active %>
+    $("#products_List_active").html("");
+    $("#products_List_active").html(" <%= j render partial: 'product', collection: @products %>");
+
+    $("#products_List_variant").html("");
+    $("#products_List_variant").html(" <%= j render partial: 'variant', collection: @variants %>");
+    
+    $("#modalVariantProductManagerNew").modal("hide");
+<% end %>

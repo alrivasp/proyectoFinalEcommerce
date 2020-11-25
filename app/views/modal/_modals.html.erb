@@ -1,3 +1,4 @@
+
 <!-- Modal Profile administrador de perfiles-->
 <div class="modal fade" id="modalProfileDetail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalProfileDetailLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -125,21 +126,21 @@
 
           <div class="field">
             <%= form.label :name, "Nombre" %>
-            <%= form.text_field :name, id: :product_name, class: "form-control" %>
+            <%= form.text_field :name, id: :product_name, class: "form-control",:required => true , style:"text-transform:uppercase"%>
           </div>
           
           <div class="field">
             <%= form.label :description, "Descripcion" %>
-            <%= form.text_area :description, id: :product_description, class: "form-control" %>
+            <%= form.text_area :description, id: :product_description, class: "form-control",:required => true , style:"text-transform:uppercase"%>
           </div>
           
           <div class="field">
             <%= form.label :price, "Precio" %>
-            <%= form.number_field :price, id: :product_price, class: "form-control" %>
+            <%= form.number_field :price, id: :product_price, class: "form-control",:required => true %>
           </div>
           <div class="field">
             <%= form.label :sku, "SKU" %>
-            <%= form.text_field :sku, id: :product_sku, class: "form-control" %>
+            <%= form.text_field :sku, id: :product_sku, class: "form-control",:required => true, style:"text-transform:uppercase" %>
           </div>
           <br/>
           <div class="field">
@@ -149,22 +150,22 @@
           
           <div class="form-group">
             <%= form.label :category_id, "Categoria" %>
-            <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, {} ,id: :product_category_id, include_blank:false, :class => "form-control" %>
+            <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, {include_blank: "Seleccione Categoria de Producto"} ,id: :product_category_id, include_blank:true, :class => "form-control",:required => true %>
           </div>
           
           <div class="form-group">
             <%= form.label :model_product_id, "Modelo" %>
-            <%= form.select :model_product_id, ModelProduct.all.collect {|mp| [mp.name, mp.id]}, {} ,id: :product_model_product_id, include_blank:false, :class => "form-control" %>
+            <%= form.select :model_product_id, ModelProduct.all.collect {|mp| [mp.name, mp.id]}, {include_blank: "Seleccione Modelo de Producto"} ,id: :product_model_product_id, include_blank:true, :class => "form-control", :required => true %>
           </div>
           <br/>
           <div class="field">
             <%= form.label :front, "Adjunta foto principal" %>
-            <%= form.file_field :front,  id: :product_front%> 
+            <%= form.file_field :front,  id: :product_front,:required => true, id: :image_single %> 
           </div>
           <br/>
           <div class="field">
             <%= form.label :galery, "Adjunta fotos para galeria" %>
-            <%= form.file_field :galery, multiple: true %> 
+            <%= form.file_field :galery, multiple: true, id: :image_multi %> 
           </div>
           <br/>
           <div class="actions">
@@ -210,12 +211,12 @@
 
           <div class="field">
             <%= form.label :name, "Nombre" %>
-            <%= form.text_field :name, id: :product_names, class: "form-control" %>
+            <%= form.text_field :name, id: :product_names, class: "form-control", style:"text-transform:uppercase" %>
           </div>
           
           <div class="field">
             <%= form.label :description, "Descripcion" %>
-            <%= form.text_area :description, id: :product_descriptions, class: "form-control" %>
+            <%= form.text_area :description, id: :product_descriptions, class: "form-control", style:"text-transform:uppercase" %>
           </div>
           
           <div class="field">
@@ -224,7 +225,7 @@
           </div>
           <div class="field">
             <%= form.label :sku, "SKU" %>
-            <%= form.text_field :sku, id: :product_skus, class: "form-control" %>
+            <%= form.text_field :sku, id: :product_skus, class: "form-control", style:"text-transform:uppercase" %>
           </div>
           <br/>
           <div class="field">
@@ -264,3 +265,406 @@
     </div>
   </div>
 </div>
+
+<!-- Modal administrador producto Variant nuevo-->
+<div class="modal fade" id="modalVariantProductManagerNew" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalVariantProductmanagerNewLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h6 class="modal-title text-white" id="modalVariantProductmanagerNewLabel">Crear Nuevo Producto</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-devise" id="bodyModalVariantProductManagerNew">
+        <% variant = Variant.new %>
+        <%= form_with model: variant ,url: create_variant_productmanager_path, remote: true do |form| %>
+          <% if product.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+              <ul>
+              <% product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+           <div class="form-group">
+            <%= form.label :product_id, "Sku Producto" %>
+            <%= form.select :product_id, Product.all.collect {|p| [p.sku, p.id]}, {include_blank: "Seleccione Sku de Producto"} ,id: :product_category_id_variant_create, include_blank:true, :class => "form-control", :required => true %>
+          </div>
+
+          <div class="field">
+            <%= form.label :stock, "Stock" %>
+            <%= form.number_field :stock, id: :stock_variant_create, class: "form-control", :required => true %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :size_product_id, "Talla de Producto" %>
+            <%= form.select :size_product_id, SizeProduct.all.collect {|sp| [sp.name, sp.id]}, {include_blank: "Seleccione una Talla"} ,id: :size_product_id_variant_create, include_blank:true, :class => "form-control",:required => true %>
+          </div>
+
+          <br/>
+          <div class="actions">
+            <%= form.submit "Crear Variante", class:"form-control btn btn-primary btn-lg btn-block", data: {disable_with: "Procesando..."} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer" id="footerModalVariantProductManagerNew" >
+        <button type="button" class="form-control btn btn-danger btn-lg btn-block" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal administrador  producto variante Editar-->
+<div class="modal fade" id="modalVariantProductManagerEdit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalVariantProductManagerEditLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h6 class="modal-title text-white" id="modalVariantProductManagerEditLabel">Editar Producto</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-devise" id="bodyModalVariantProductManagerEdit">
+         <% variant = Variant.new %>
+        <%= form_with model: variant ,url: update_variant_productmanager_path, remote: true do |form| %>
+          <% if product.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+              <ul>
+              <% product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="field" id="field_variant_id_edit">
+            <%= form.label :id  %>
+            <%= form.number_field :id, id: :variant_id_edit, class: "form-control" %>
+          </div>
+
+           <div class="form-group">
+            <%= form.label :product_id, "Sku Producto" %>
+            <%= form.select :product_id, Product.all.collect {|p| [p.sku, p.id]}, {include_blank: "Seleccione Sku de Producto"} ,id: :product_category_id_variant_update, include_blank:true, :class => "form-control", :required => true, :disabled => true %>
+          </div>
+
+          <div class="field">
+            <%= form.label :stock, "Stock" %>
+            <%= form.number_field :stock, id: :stock_variant_update, class: "form-control", :required => true %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :size_product_id, "Talla de Producto" %>
+            <%= form.select :size_product_id, SizeProduct.all.collect {|sp| [sp.name, sp.id]}, {include_blank: "Seleccione una Talla"} ,id: :size_product_id_variant_update, include_blank:true, :class => "form-control",:required => true, :disabled => true %>
+          </div>
+
+          <br/>
+          <div class="actions">
+            <%= form.submit "Modificar Variante", class:"form-control btn btn-primary btn-lg btn-block", data: {disable_with: "Procesando..."} %>
+          </div>
+        <% end %>
+	      
+      </div>
+      <div class="modal-footer" id="footerModalVariantProductManagerEdit" >
+        <button type="button" class="form-control btn btn-danger btn-lg btn-block" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal Mensaje fallo-->
+<div class="modal fade" id="modalMessageError" tabindex="-1" aria-labelledby="modalMessageErrorLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white " id="modalMessageErrorLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bg-light text-center" id="modalBodyMessageError"></div>
+      <div class="modal-footer bg-danger" id="modalFooterMessageError">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal administrador admin  ordenes detail-->
+<div class="modal fade" id="modalOderManagerDetail" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalOderManagerDetailLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalOderManagerDetailLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalOrderManagerDetailInfo">
+          <div id="titleBodyOrderManagerDetail"></div>
+          <table class="table table-hover">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">SKU</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Talla</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="detailTableOrderManagerDetail">
+
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="modal-footer" id="footerModalOrderManagerDetail" >
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal administrador admin  ordenes history-->
+<div class="modal fade" id="modalOderManagerHistory" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalOderManagerHistorylLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalOderManagerHistorylLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalOrderManagerHistory">
+          <div id="titleBodyOrderManagerHistory"></div>
+          <div class=""><span class="p-1 bg-warning text-primary "><i class="fa fa-square-o" aria-hidden="true"></i> : Estado Actual</span></div>
+          <table class="table table-hover mt-2">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">OC</th>
+                <th scope="col">Tipo de Orden</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody id="detailTableOrderManagerHistory">
+
+            </tbody>
+          </table>
+      </div>
+      <div class="modal-footer" id="footerModalOrderManagerHistory" >
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal administrador  admin  ordenes cambio-->
+<div class="modal fade" id="modalOrderManagerChange" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalOrderManagerChangeLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalOrderManagerChangeLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalOrdermanagerChange">
+        
+      </div>
+      <div class="modal-footer" id="footerModalOrdermanagerChange" >
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal carro de compras checkout-->
+<div class="modal fade" id="modalCartCheckOut" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalCartCheckOutLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalCartCheckOutLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalCartCheckOut">
+        
+      </div>
+      <div class="modal-footer" id="footerModalCartCheckOut" >
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal carro de compras checkout typo de orden-->
+<div class="modal fade" id="modalCartCheckOutTypeOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalCartCheckOutTypeOrderLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalCartCheckOutTypeOrderLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalCartCheckOutTypeOrder">
+        <%= form_tag( checkout_pay_sale_cart_path, method: "post", remote: true) do %>
+              <%= select(:order_type_id_check, params[:order_type_id], OrderType.all.collect {|b| [b.name, b.id]}, {include_blank: "Seleccione Despacho"},{:required => true, class:'form-control',id: :order_type_id_check}) %>
+              <hr>
+              <button type="button" class="btn btn-primary float-right m-1" data-dismiss="modal">Cerrar</button>
+              <%= submit_tag "Siguiente", class:"btn btn-success float-right m-1", data: {disable_with: "Procesando Compra..."} %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal carro de compras checkout typo de pago-->
+<div class="modal fade" id="modalCartCheckOutPayOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalCartCheckOutPayOrderLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalCartCheckOutPayOrderLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalCartCheckOutPayOrder">
+        <%= form_tag( checkout_summary_sale_cart_path, method: "post", remote: true) do %>
+              <%= select(:payment_method_id, params[:payment_method_id], PaymentMethod.all.collect {|b| [b.name, b.id]}, {include_blank: "Seleccione Tipo de Pago"},{:required => true, class:'form-control'}) %>
+              <hr>
+              <button type="button" class="btn btn-primary float-right m-1" data-dismiss="modal">Cerrar</button>
+              <%= submit_tag "Siguiente", class:"btn btn-success float-right m-1", data: {disable_with: "Procesando Compra..."} %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal carro de compras checkout resumen-->
+<div class="modal fade" id="modalCartCheckOutSummaryOrder" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalCartCheckOutSummaryOrderLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalCartCheckOutSummaryOrderLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalCartCheckOutSummaryOrder">
+        <div class="row ">
+          <div class="col-4">
+            <div class="text-right">Nombre :</div>
+            <div class="text-right">Rut :</div>
+            <div class="text-right">Direccion :</div>
+            <div class="text-right">Comuna :</div>
+            <div class="text-right">Provincia :</div>
+            <div class="text-right">Region :</div>
+            <br>
+            <hr>
+            <br>
+            <div class="text-right">Orden de Compra N° :</div>
+            <div class="text-right">Tipo de Despacho :</div>
+            <div class="text-right">Productos :</div>
+            <div class="text-right" id="product_space"></div>
+            <div class="text-right">Total :</div>
+            <br>
+            <hr>
+            <br>
+            <div class="text-right">Tipo de Pago :</div>
+          </div>
+          <div class="col-8">
+            <div id="summary_name"></div>
+            <div id="summary_dni"></div>
+            <div id="summary_adress"></div>
+            <div id="summary_cummune"></div>
+            <div id="summary_province"></div>
+            <div id="summary_region"></div>
+            <br>
+            <hr>
+            <br>
+            <div id="summary_oc"></div>
+            <div id="summary_td"></div>
+            <div id="summary_products"></div>
+            <div id="summary_total"></div>
+            <br>
+            <hr>
+            <br>
+            <div id="summary_tp"></div>
+            <br>
+          </div>
+        </div>
+         <div class="modal-footer" id="footerModalCartCheckOutSummaryOrder" >
+            
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal carro de compras checkout-->
+<div class="modal fade" id="modalCartCheckOutEnd" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalCartCheckOutEndLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-white" id="modalCartCheckOutEndLabel">Modal title</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalCartCheckOutEnd">
+        
+      </div>
+      <div class="modal-footer" id="footerModalCartCheckOutEnd" >
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal administrador  admin  ordenes cambio-->
+<div class="modal fade" id="modalOrderManagerChangePending" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalOrderManagerChangePendingLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalOrderManagerChangePendingLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalOrdermanagerChangePending">
+        <div id="order_status_op_one">
+          <%= form_tag( change_order_ordermanager_path, method: "get", remote: true) do %>
+              <%= text_field_tag :order_id, params[:order_type] , id: :input_order_id_one %>
+              <%= select(:order_status_id, params[:order_status_id], OrderStatus.where(id: [7,8]).collect {|b| [b.name, b.id]}, {include_blank: "Seleccione Estado"},{:required => true, class:'form-control'}) %>
+              <br/>
+              <%= submit_tag "Cambiar Estado", class:"btn btn-success float-right m-1", data: {disable_with: "Cambiando estado..."} %>
+          <% end %>
+        </div>
+        <div id="order_status_op_two">
+          <%= form_tag( change_order_ordermanager_path, method: "get", remote: true) do %>
+              <%= text_field_tag :order_id, params[:order_type] , id: :input_order_id_two %>
+              <%= select(:order_status_id, params[:order_status_id], OrderStatus.where(id: [3,4,5,7,8]).collect {|b| [b.name, b.id]}, {include_blank: "Seleccione Estado"},{:required => true, class:'form-control'}) %>
+              <br/>
+              <%= submit_tag "Cambiar Estado", class:"btn btn-success float-right m-1", data: {disable_with: "Cambiando estado..."} %>
+          <% end %>
+        </div>
+        <button type="button" class="btn btn-primary float-right m-1" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+</div>
+

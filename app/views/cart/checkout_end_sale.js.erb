@@ -1,0 +1,20 @@
+//Limpiar
+$('#modalCartCheckOutEndLabel').text('')
+$('#bodyModalCartCheckOutEnd').text('')
+$('#footerModalCartCheckOutEnd').text('')
+
+$('#modalCartCheckOutEndLabel').html('<strong>Compra Finalizada</strong>')
+$(document.createElement('h6')).html("Proceso de Compra Finalizado con Exito,<br/> tu Orden de Compra N° <%= @order.number %> ahora se encuntra pendiente de envio <br> nos contactaremos contigo para coordinar la entrega o el envio.-").appendTo("#bodyModalCartCheckOutEnd");
+$(document.createElement('h6')).addClass("text-center").html("Muchas Gracias por tu Compra.-").appendTo("#bodyModalCartCheckOutEnd");
+
+
+//footer
+btn =  '<%= link_to "Aceptar", cart_in_progress_path, class:"btn btn-success" %>'
+    $("#footerModalCartCheckOutEnd").html(btn)
+
+$('#modalCartCheckOutSummaryOrder').modal('hide')
+$('#modalCartCheckOutEnd').modal('show')
+
+$("#item_List_cart").html("");
+$("#item_List_cart").html(" <%= j render partial: 'item', collection: @items %>");
+

@@ -20,18 +20,18 @@ $('#footerModalProductManager').text("")
             img = '<%= image_tag("photo-default", class:"photo-default" )%>'
             $("#photoFrontProduct").html(img)
         <% end  %>
-        $(document.createElement('p')).html("<strong>Descripcion:</strong><%= @product.description.html_safe %>").appendTo("#bodyProductManager");
-        $(document.createElement('p')).html("<strong>Modelo:</strong><%= @product.model_product.name.html_safe %>").appendTo("#bodyProductManager");
-        $(document.createElement('p')).html("<strong>Marca:</strong><%= @product.model_product.mark.name.html_safe %>").appendTo("#bodyProductManager");
-        $(document.createElement('p')).html("<strong>Categoria:</strong><%= @product.category.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Descripcion:  </strong><%= @product.description.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Modelo:  </strong><%= @product.model_product.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Marca:  </strong><%= @product.model_product.mark.name.html_safe %>").appendTo("#bodyProductManager");
+        $(document.createElement('p')).html("<strong>Categoria:  </strong><%= @product.category.name.html_safe %>").appendTo("#bodyProductManager");
     <% @variants.each do |variant|%>
-        $(document.createElement('span')).html("<strong>Stock:</strong><%= variant.stock %>").appendTo("#bodyProductManager");
+        $(document.createElement('span')).html("<strong>Stock:  </strong><%= variant.stock %>").appendTo("#bodyProductManager");
         $(document.createElement('i')).html("      ").appendTo("#bodyProductManager");
-        $(document.createElement('i')).html("<strong>Talla:</strong> <%= variant.size_product.name %>").appendTo("#bodyProductManager");
+        $(document.createElement('i')).html("<strong>Talla:  </strong> <%= variant.size_product.name %>").appendTo("#bodyProductManager");
         $(document.createElement('br')).appendTo("#bodyProductManager");
     <% end %>
     $(document.createElement('br')).appendTo("#bodyProductManager");
-    $(document.createElement('h2')).html("<strong>Precio: </strong><%= number_to_currency(@product.price ,unit: '$', :precision => 0, format: '%u %n') %>").appendTo("#bodyProductManager");
+    $(document.createElement('h2')).html("<strong>Precio:  </strong><%= number_to_currency(@product.price ,unit: '$', :precision => 0, format: '%u %n') %>").appendTo("#bodyProductManager");
     //footer
     $(document.createElement('button'))
                                     .addClass("btn btn-primary")
@@ -46,7 +46,7 @@ $('#footerModalProductManager').text("")
         $('#modalProductmanagerLabel').html("<strong>Desactivar Producto</strong> <%= @product.name.html_safe %>")
         //Body
         $(document.createElement('br')).appendTo("#bodyModalProductManager");
-        $(document.createElement('h6')).html('¿Esta seguro que quiere <strong>Desactivar</strong> este Producto?').appendTo("#bodyModalProductManager");
+        $(document.createElement('h6')).addClass("text-center").html('¿Esta seguro que quiere <strong>Desactivar</strong> este Producto?').appendTo("#bodyModalProductManager");
         //Footer
         btn =  '<%= link_to "Confirmar Cambio", inactivate_productmanager_path(@product), remote: true, method: :post, data: { disable_with: "Procesando..." }, class:"btn btn-success" %>'
         $("#footerModalProductManager").html(btn)
@@ -63,7 +63,7 @@ $('#footerModalProductManager').text("")
     $('#modalProductmanagerLabel').html("<strong>Activar Producto</strong> <%= @product.name.html_safe %>")
     //Body
     $(document.createElement('br')).appendTo("#bodyModalProductManager");
-    $(document.createElement('h6')).html('¿Esta seguro que quiere <strong>Activar</strong> este Producto?').appendTo("#bodyModalProductManager");
+    $(document.createElement('h6')).addClass("text-center").html('¿Esta seguro que quiere <strong>Activar</strong> este Producto?').appendTo("#bodyModalProductManager");
     //Footer
     btn =  '<%= link_to "Confirmar Cambio", activate_productmanager_path(@product), remote: true, method: :post, data: { disable_with: "Procesando..." }, class:"btn btn-success" %>'
     $("#footerModalProductManager").html(btn)

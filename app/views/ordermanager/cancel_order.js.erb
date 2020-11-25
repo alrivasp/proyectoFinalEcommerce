@@ -1,0 +1,9 @@
+    //limpiar
+    $('#modalOrderManagerChangeLabel').text("")
+    $('#bodyModalOrdermanagerChange').text("")
+    $('#footerModalOrdermanagerChange').text("")
+    //recargar lista
+    $("#order_List_in_progress").html("");
+    $("#order_List_in_progress").html(" <%= j render partial: 'order', collection: @orders %>");
+    //cerrar modal
+    $("#modalOrderManagerChange").modal("hide")

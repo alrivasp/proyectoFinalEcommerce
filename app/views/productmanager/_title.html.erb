@@ -1,5 +1,15 @@
-<div>
-    <%= link_to "Agregar Producto", create_productmanager_path(@product), "data-toggle" => "modal", "data-target" => "#modalProductManagerNew", class:"btn btn-success"%>
-    <%= link_to "Productos Activos", productmanager_active_products_path, class:"btn btn-primary"%>
-    <%= link_to "Productos Inactivos", productmanager_inactive_products_path, class:"btn btn-primary"%>
+<div class="">
+    
+    <%= link_to "Agregar Producto", create_productmanager_path(@product), "data-toggle" => "modal", "data-target" => "#modalProductManagerNew", class:"btn btn-success shadow"%>
+    <%= link_to "Agregar Variante", create_productmanager_path(@product), "data-toggle" => "modal", "data-target" => "#modalVariantProductManagerNew", class:"btn btn-success shadow"%>
+    
+    <!--Variantes de producto-->
+    <%= link_to "Productos x Variantes",productmanager_variant_products_path, class:"btn btn-primary float-right shadow"%>
+    
+    <!--productos por estado-->
+    <%= link_to "Productos Inactivos", productmanager_inactive_products_path, class:"btn btn-primary float-right mr-1 shadow-lg"%>
+    <%= link_to "Productos Activos", productmanager_active_products_path, class:"btn btn-primary float-right mr-1 shadow-lg"%>
+    
+
+    
 </div>

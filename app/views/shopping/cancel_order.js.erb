@@ -1,4 +1,8 @@
 $("#order_in_progress_List").html("");
+$("#order_pending_List").html("");
+$("#order_canceled_List").html("");
+$("#order_finished_List").html("")
+
 $("#order_in_progress_List").html(" <%= j render partial: 'order', collection: @orders %>");
 
 $("#modalComprasDetail").modal("hide");

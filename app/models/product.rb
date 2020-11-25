@@ -5,4 +5,6 @@ class Product < ApplicationRecord
 
   has_one_attached :front
   has_many_attached :galery
+
+  validates :sku, uniqueness: true
 end

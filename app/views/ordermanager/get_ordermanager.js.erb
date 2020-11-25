@@ -1,0 +1,123 @@
+
+<% if @type == "ver" %>
+    //limpiar
+    $('#modalOderManagerDetailLabel').text("")
+    $('#footerModalOrderManagerDetail').text("")
+    $('#titleBodyOrderManagerDetail').text("")
+
+    //Titulo modal
+    $('#modalOderManagerDetailLabel').html("<strong>Orden N° <%= @order.number.html_safe %>  </strong>")
+
+    //Cuerpo
+    $(document.createElement('h5')).addClass("text-center")
+                                    .html('<strong>Detalle de OC</strong>').appendTo("#titleBodyOrderManagerDetail");
+    //Tabla
+    $('#detailTableOrderManagerDetail').text("")
+    <% @order_items.each do |oi|%>
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.sku %>").appendTo("#detailTableOrderManagerDetail");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.name %>").appendTo("#detailTableOrderManagerDetail");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.model_product.name %>").appendTo("#detailTableOrderManagerDetail");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.model_product.mark.name %>").appendTo("#detailTableOrderManagerDetail");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.size_product.name %>").appendTo("#detailTableOrderManagerDetail");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.quantity %>").appendTo("#detailTableOrderManagerDetail");
+        $(document.createElement('td')).addClass("text-center").html("<%= number_to_currency(oi.price ,unit: '$', :precision => 0, format: "%u %n") %>").appendTo("#detailTableOrderManagerDetail");
+    <% end %>
+
+    //Footer
+    $(document.createElement('button'))
+                                        .addClass("btn btn-primary")
+                                        .attr('id','btnProfileClose')
+                                        .attr('type','button')
+                                        .attr('data-dismiss','modal')
+                                        .text("Cerrar")
+                                        .appendTo("#footerModalOrderManagerDetail");
+    //Up modal
+    $("#modalOderManagerDetail").modal("show")
+
+<% elsif @type == "historia" %>
+    //limpiar
+    $('#modalOderManagerHistorylLabel').text("")
+    $('#titleBodyOrderManagerHistory').text("")
+    $('#detailTableOrderManagerHistory').text("")
+    //Titulo modal
+    $('#modalOderManagerHistorylLabel').html("<strong>Historial de Orden N° <%= @order.number.html_safe %>  </strong>")
+
+    //Cuerpo
+    $(document.createElement('h5')).addClass("text-center")
+                                    .html('<strong>Historial de OC</strong>').appendTo("#titleBodyOrderManagerHistory");
+    //Tabla
+    $('#detailTableOrderManagerDetail').text("")
+    <% @order_histories.each_with_index do |oh, index|%>
+        <% if index == 0 %>
+            $(document.createElement('tr')).attr("id","colModalOrderHistoryTable-<%= index %>").appendTo("#detailTableOrderManagerHistory");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.order.number %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.order.order_type.name %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.created_at.strftime("%d-%m-%Y") %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.created_at.strftime("%H:%M") %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.description %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("bg-warning text-primary text-center").html("<%= oh.order_status.name %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+        <% else %>
+            $(document.createElement('tr')).addClass("border-primary").attr("id","colModalOrderHistoryTable-<%= index %>").appendTo("#detailTableOrderManagerHistory");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.order.number %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.order.order_type.name %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.created_at.strftime("%d-%m-%Y") %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.created_at.strftime("%H:%M") %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.description %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+            $(document.createElement('td')).addClass("text-center").html("<%= oh.order_status.name %>").appendTo("#colModalOrderHistoryTable-<%= index %>");
+        <% end %>
+    <% end %>
+    
+    //Up modal
+    $("#modalOderManagerHistory").modal("show")
+<% elsif @type == "cancel" %>
+    //limpiar
+    $('#modalOrderManagerChangeLabel').text("")
+    $('#bodyModalOrdermanagerChange').text("")
+    $('#footerModalOrdermanagerChange').text("")
+
+
+    //Titulo
+    $('#modalOrderManagerChangeLabel').html("<strong>Cancelar Orden de Compra</strong> ")
+    //Body
+    $(document.createElement('br')).appendTo("#bodyModalOrdermanagerChange");
+    $(document.createElement('h6')).addClass("text-center").html('¿Esta seguro que quiere <strong>Cancelar</strong> la Orden N° <%= @order.number %>?').appendTo("#bodyModalOrdermanagerChange");
+    //Footer
+    btn =  '<%= link_to "Confirmar Cancelacion", cancel_order_ordermanager_path(@order), remote: true, method: :post, class:"btn btn-success", data: {disable_with: "Cancelando Orden..."} %>'
+    $("#footerModalOrdermanagerChange").html(btn)
+    $(document.createElement('button'))
+                                    .addClass("btn btn-primary")
+                                    .attr('id','btnProfileClose')
+                                    .attr('type','button')
+                                    .attr('data-dismiss','modal')
+                                    .text("Cancelar")
+                                    .appendTo("#footerModalOrdermanagerChange");
+
+    $("#modalOrderManagerChange").modal("show")
+<% elsif @type == "cambio" %>
+    //limpiar
+    $('#modalOrderManagerChangePendingLabel').text("")
+    $('#footerModalOrdermanagerChangePending').text("")
+
+    //Titulo
+    $('#modalOrderManagerChangePendingLabel').html("<strong>Cambiar Estado de Orden de Compra</strong> ")
+    $('#input_order_id_one').hide()
+    $('#input_order_id_two').hide()
+    //body
+    <% if @order_type == 1 %>
+        
+        $('#order_status_op_two').hide()
+        $('#input_order_id_one').val("<%= @order.id %>")
+        $('#order_status_op_one').show()
+        
+    <% else  %>
+        
+        $('#order_status_op_one').hide()
+        $('#input_order_id_two').val("<%= @order.id %>")
+        $('#order_status_op_two').show()
+        
+    <% end  %>
+
+    
+    $("#modalOrderManagerChangePending").modal("show")
+<% end %>
+

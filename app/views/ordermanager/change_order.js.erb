@@ -1,0 +1,12 @@
+//limpiar
+
+$('#input_order_id_one').hide()
+$('#input_order_id_two').hide()
+$('#order_status_id').val("")
+$('#order_status_id_').val("")
+
+//recargar lista
+$("#order_List_pending").html("");
+$("#order_List_pending").html(" <%= j render partial: 'order', collection: @orders %>");
+//cerrar modal
+$("#modalOrderManagerChangePending").modal("hide")

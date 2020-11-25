@@ -616,4 +616,27 @@ OrderStatus.create(
     type_order: 3
 )
 
+OrderStatus.create(
+    name: "Finalizado",
+    description: "Venta Finalizada Correctamente Pago OK - Entrega OK",
+    type_order: 3
+)
+
 puts ("Se crean Estados de orden")
+
+PaymentMethod.create(
+    name: "Efectivo",
+    code: "CASH"
+)
+
+PaymentMethod.create(
+    name: "Transferencia",
+    code: "TRANS"
+)
+
+PaymentMethod.create(
+    name: "Paypal Express Checkout",
+    code: "PEC"
+)
+
+puts ("Se crean Metodos de Pago")
