@@ -2,20 +2,19 @@
     <% if notice.nil? && alert.nil? %>
 
     <% elsif !notice.nil? %>
-        <div class="alert alert-light alert-dismissible fade show text-center alert-style" role="alert">
+        <div class="alert alert-light alert-dismissible fade show text-center alert-style alert-page" role="alert">
             <strong><i class="fa fa-bell" aria-hidden="true"></i></strong> <i class="notice "><%= notice %></i>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     <% elsif !alert.nil? %>
-        <div class="alert alert-warning alert-dismissible fade show text-center alert-style" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show text-center alert-style alert-page" role="alert">
             <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></strong> <i class="alert "><%= alert %></i>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     <% end %>
-    
 </div>
 

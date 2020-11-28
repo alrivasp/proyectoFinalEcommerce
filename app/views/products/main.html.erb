@@ -1,9 +1,10 @@
-<div class="bg-product">
-    <div class="pt-4 pb-4">
-        <h1 class="text-center">Productos</h1>
+<div class="bg-product mb-5">
+    <div class="mb-4 shadow-lg">
+        <%= image_tag "banner_jeans.jpg", class:"w-100"%>
+        
     </div>
 
-    <div class ="row justify-content-center pb-3">
+    <div class ="row justify-content-center pb-3" id="list_product-ppal-free">
             <%= render partial: "product", collection: @products %>
     </div>
 

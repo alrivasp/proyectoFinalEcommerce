@@ -1,0 +1,22 @@
+   $('#punctiation-change').text("")
+   $('#list_product-ppal-free').text("")
+   
+   //popularidad
+    <% point = @product.reviews.average(:punctuation).to_i %>
+    $(document.createElement('i')).html("<strong>Popularidad: </strong>").appendTo("#punctiation-change");
+    <% point.times do |i|%>
+        $(document.createElement('i')).addClass("fa fa-star text-warning")
+                                      .attr("aria-hidden","true")
+                                      .appendTo("#punctiation-change");
+    <% end %>
+    <% star = 5 - point%>
+    <% star.times do |i|%>
+        $(document.createElement('i')).addClass("fa fa-star text-secondary")
+                                      .attr("aria-hidden","true")
+                                      .appendTo("#punctiation-change");
+    <% end %>
+
+    $("#list_product-ppal-free").html("");
+    $("#list_product-ppal-free").html("<%= j render partial: "product", collection: @products %>");
+
+    //popularidad

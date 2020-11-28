@@ -9,6 +9,7 @@
     <!--Google Apis-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&family=Oswald&family=Poppins&family=Raleway&family=Roboto&family=Source+Sans+Pro&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
     <!--Hoja de Estilos-->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!--JavaScript-->
@@ -20,16 +21,20 @@
   <body>
     <!--NavBar-->
     <%= render 'shared/navbar'%>
+
     <!--Alertas-->
     <%= render "shared/alerts" %>
+
     <!--Contenido Principal-->
     <% if user_signed_in? %>
       <%= render "shared/mainSignIn" %>
     <% else %>
       <%= render "shared/mainSignOut" %>
     <% end %>
+    
     <!--Modal-->
     <%= render "modal/modals" %>
+    
     <!--Footer-->
     <%#= render "shared/footer" %>
   </body>

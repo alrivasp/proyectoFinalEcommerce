@@ -1,0 +1,30 @@
+$('#modalMessageDefaultLabel').text("");
+$('#bodyModalMessageDefault').text("");
+$('#footerModalMessageDefault').text("");
+$('#numeric-cart').text("");
+
+
+$('#modalMessageDefaultLabel').html("<i class='fa fa-shopping-cart fa-2x' aria-hidden='true'></i>  Producto Agregado");
+$(document.createElement('h6')).addClass("text-center").html("Producto agregado al carro <i class='fa fa-check fa-3x text-primary' aria-hidden='true'></i>").appendTo("#bodyModalMessageDefault");
+$(document.createElement('button'))
+                                    .addClass("btn btn-primary")
+                                    .attr('id','btnProfileClose')
+                                    .attr('type','button')
+                                    .attr('data-dismiss','modal')
+                                    .text("Aceptar")
+                                    .appendTo("#footerModalMessageDefault");
+ 
+    <% if current_user.orders.last.order_histories.last.order_status_id == 1 %>
+        <% aux = current_user.orders.last.order_items.count %>
+        $(document.createElement("span"))
+                                        .addClass("badge badge-pill badge-danger accesos-iconos-badge")
+                                        .html("<%= aux %>")
+                                        .appendTo("#numeric-cart");
+
+ 
+ <% end %>
+
+
+                                    
+
+$('#modalMessageDefault').modal("show")

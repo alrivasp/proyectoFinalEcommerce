@@ -1,23 +1,38 @@
 <div class="col-auto">
     <!--Crad Producto-->
     <div class="card-product ml-1 mr-1 mt-3 mb-3 shadow">
-        <div class="card flip-card " style="width: 20rem;">
+        <div class="card" style="width: 14.5rem;">
             <!--Foto Producto-->
-            <img src="..." class="card-img-top" alt="...">
+
+            <% if product.front.attached? %>
+              <%= image_tag product.front.variant(resize: '500x400'),class:"card-img-top" %>
+            <% else %>
+
+            <% end %>
             <!--Cuerpo card-->
             <div class="card-body">
-              <h5 class="card-title"><%= product.name %></h5>
-              <p class="card-text"><%= product.description %></p>
+              <span class="card-title title-card-product"><strong><%= product.name %></strong></span>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Tallas:</li>
-              <li class="list-group-item">Marca: <%= product.model_product.mark.name %></li>
-              <li class="list-group-item">Modelo: <%= product.model_product.name %></li>
+              <li class="list-group-item detail-card-product"><strong>Marca: </strong><span class="text-muted"><%= product.model_product.mark.name %></span></li>
+              <li class="list-group-item detail-card-product"><strong>Popularidad: </strong>
+                <% point = product.reviews.average(:punctuation).to_i %>
+                <% point.times do |i|%>
+                  <i class="fa fa-star text-warning" aria-hidden="true"></i>
+                <% end %>
+
+                <% star = 5 - point%>
+                <% star.times do |i|%>
+                  <i class="fa fa-star text-secondary" aria-hidden="true"></i>
+                <% end %>
+
+              </li>
             </ul>
             <!--Footer Card-->
             <div class="card-body">
-              <%= link_to "Detalle", get_product_info_path(product, 'ver'), remote: true, class:"btn btn-primary float-right ml-1" %>
-              <%= link_to "<i class='fa fa-cart-plus' aria-hidden='true'> Agregar</i>".html_safe, root_path, class:"btn btn-success float-right" %>
+              <span> <%= number_to_currency(product.price ,unit: '$', :precision => 0, format: "%u %n") %></span>
+              <%= link_to "<i class='fa fa-info-circle fa-2x' aria-hidden='true'></i>".html_safe, get_product_info_path(product, 'ver'), remote: true, class:"text-success float-right ml-1" %>
+              
             </div>
         </div>
     </div>

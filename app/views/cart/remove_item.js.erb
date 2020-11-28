@@ -1,4 +1,8 @@
 $("#item_List_cart").html("");
 $("#item_List_cart").html(" <%= j render partial: 'item', collection: @items %>");
 
+$("#in_progress_total").text("");
+$("#in_progress_total").html('TOTAL :<%= number_to_currency( @order.total ,unit: '$', :precision => 0, format: "%u %n") %>');
+
+
 $("#modalCartCompras").modal("hide");

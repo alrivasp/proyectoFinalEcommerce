@@ -25,6 +25,8 @@ class CartController < ApplicationController
     item = OrderItem.find(params[:item])
     @items = OrderItem.where(order_id: item.order_id)
     item.destroy
+    @order = Order.find(item.order_id)
+    @order.compute_total
   end
 
   def checkout_adress_sale

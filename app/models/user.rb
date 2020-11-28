@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   belongs_to :commune
+  has_many :reviews
+  has_many :orders
   enum gender: [:Masculino, :Femenino]
 
   #Devise anular el método de destrucción del usuario

@@ -17,8 +17,17 @@
       <p class="mb-0 title-ppal">JEANS LOVERS SHOP</p>
     <% end %>  
     <div class="mr-5">
-
-      <%= link_to "<i class='fa fa-shopping-bag fa-2x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe %>
+      <%if user_signed_in? %>
+        <% if current_user.orders.present? %>
+          <% if current_user.orders.last.order_histories.last.order_status_id == 1 %>
+            <% aux = current_user.orders.last.order_items.count %>
+            <span id="numeric-cart"><span class="badge badge-pill badge-danger accesos-iconos-badge"><%= aux %></span></span>
+          <% end %>
+        <% else %>
+          
+        <% end %>  
+      <% end %>
+      <%= link_to "<i class='fa fa-shopping-bag fa-2x accesos-iconos text-decoration-none text-dark '></i>".html_safe %>
       <%= link_to "<i class='fa fa-search fa-2x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe %>
       <% if user_signed_in? %>
         <%= link_to "<i class='fa fa-sign-out fa-1x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe , destroy_user_session_path, method: :delete %>

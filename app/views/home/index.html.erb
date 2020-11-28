@@ -1,24 +1,289 @@
-<div class="carrusel-index">
-<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-interval="10000">
-      <img src="https://s1.1zoom.me/b5050/275/Jeans_Legs_Belly_520272_1920x1080.jpg" class="d-block w-100" alt="...">
+<!--Carousel Wrapper-->
+<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+  <!--Indicators-->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+    <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+  </ol>
+  <!--/.Indicators-->
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+    <!--First slide-->
+    <div class="carousel-item active">
+        <%= image_tag "cr_girl.jpg", class:"d-block w-100", alt:"First slide" %>
     </div>
-    <div class="carousel-item" data-interval="2000">
-      <img src="https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2018/05/30164203/camperas-de-jean-8.jpg" class="d-block w-100" alt="...">
-    </div>
+    <!--/First slide-->
+    <!--Second slide-->
     <div class="carousel-item">
-      <img src="https://p4.wallpaperbetter.com/wallpaper/733/594/558/model-high-heels-blonde-jeans-woman-women-s-black-spaghetti-strap-top-blue-denim-jeans-wallpaper-preview.jpg" class="d-block w-100" alt="...">
+        <%= image_tag "cr_love.jpg", class:"d-block w-100", alt:"Second slide" %>
     </div>
+    <!--/Second slide-->
+    <!--Third slide-->
+    <div class="carousel-item">
+        <%= image_tag "cr_jeans.jpg", class:"d-block w-100", alt:"Third slide" %>
+    </div>
+    <!--/Third slide-->
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+  <!--/.Slides-->
+  <!--Controls-->
+  <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+  <!--/.Controls-->
 </div>
-</div>
+<!--/.Carousel Wrapper-->
 
+<!--Info-->
+<div class="container my-5 py-5 z-depth-1">
+
+
+    <!--Section: Content-->
+    <section class="px-md-5 mx-md-5 text-center dark-grey-text">
+
+      <!--Grid row-->
+      <div class="row justify-content-center">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4 mb-md-0">
+
+          <h3 class="font-weight-bold">Nuestra Tienda</h3>
+
+          <p class="text-muted">Jeans Lover Shop en una tienda Online que nace de la necesidad post Estallido Social
+          y pre Pandemia, esta tienda busca llevar a la puerta de su casa "Jeans" de todo tipo
+          para Mujeres en la IV Region de Coquimbo - la Serena y tambien para Regiones y Santiago.</p>
+
+          <%= link_to "<i class='fa fa-user-plus' aria-hidden='true'>  Registrate</i>".html_safe, new_user_registration_path, class:"btn btn-danger rounded-pill btn-sm shadow-lg" %>
+
+          <hr class="my-5">
+
+          <p class="font-weight-bold">Siguenos en:</p>
+
+          <%= link_to "<i class='fa fa-instagram fa-3x'></i>".html_safe,"https://www.instagram.com/jeans.lovers.shop/?igshid=lfw3tqbcdrdu", class:"mr-1" %>
+          <%= link_to "<i class='fa fa-whatsapp fa-3x'></i>".html_safe,"https://wa.me/c/56942924384", class:"ml-1" %>
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-5 mb-4 mb-md-0">
+
+          <%= image_tag "jls_logo_", class:"img-fluid"%>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+</div>
+<!--Info-->
+
+<!--Marcas-->
+<div class="z-depth-1 my-5 bg-light">
+
+  <!-- Section -->
+  <section class="py-5">
+
+    <h1 class="font-weight-bold text-center indigo-text mb-5">Marcas que Vendemos</h1>
+
+    <!-- Grid row -->
+    <div class="row justify-content-center">
+
+      <!-- Grid column -->
+      <div class="col-md-6 col-lg-5 offset-lg-1 align-self-start text-center">
+
+        <div class="view">
+          <%= image_tag "brussi.png", class:"img-fluid mx-auto w-50", alt:"brussi image"%>
+        </div>
+
+        <div class="view">
+          <%= image_tag "dirty_jeans.png", class:"img-fluid mx-auto  w-50", alt:"dirty image"%>
+        </div>
+
+        <div class="view">
+          <%= image_tag "efesis.png", class:"img-fluid mx-auto w-50", alt:"efesis image"%>
+        </div>
+
+        <div class="view">
+          <%= image_tag "exotic.png", class:"img-fluid mx-auto w-50", alt:"exotic image"%>
+        </div>
+
+        <div class="view">
+          <%= image_tag "guess.png", class:"img-fluid mx-auto w-50", alt:"guess image"%>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-6 col-lg-5 align-self-start">
+
+        <div class="view">
+          <%= image_tag "jeans_unidos.png", class:"img-fluid mx-auto w-50", alt:"jeans_unidos image"%>
+        </div>
+
+        <div class="view">
+          <%= image_tag "jeans.png", class:"img-fluid mx-auto w-50", alt:"jeans image"%>
+        </div>
+
+        <div class="view">
+          <%= image_tag "kaporal.png", class:"img-fluid mx-auto w-50", alt:"kaporal image"%>
+        </div>
+
+        <div class="view">
+          <%= image_tag "paradice.png", class:"img-fluid mx-auto w-50", alt:"paradice image"%>
+        </div>
+
+        <div class="view">
+          <%= image_tag "urban.png", class:"img-fluid mx-auto w-50", alt:"urban image"%>
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </section>
+  <!-- Section -->
+
+</div>
+<!--Marcas-->
+
+<!--ceo-->
+<div class="container z-depth-1 py-5 my-5">
+  <section class="mx-md-5 text-center text-lg-left">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12">
+        <div class="row p-5">
+          <div class="col-lg-8 d-flex flex-column justify-content-between">
+            <p class="text-muted mb-4">El como nacio Jeans Lover Shop, es porque un día encontré una tienda online que se hizo súper conocida a través de redes sociales, tenian jeans lindos, publicidad llamativa y me gustó el hecho de "ser mi propia jefa", ahí empecé a ver fábricas y distribuidores de jeans y ver si convenía o no invertir y calcular aprox la ganancia y me di cuenta que además llama harto la atención el jeans de mujer, debido a todo aquello y después de pensarlo harto, me atreví.</p>
+            <div>
+              <p class="font-weight-bold lead mb-2 "><strong>Constanza Perez Orrego</strong></p>
+              <p class="font-weight-bold text-muted">CEO</p>
+            </div>
+          </div>
+          <div class="col-lg-4 d-flex mb-2 align-items-center">
+              <div class="avatar mx-4 w-100 white d-flex justify-content-center align-items-center ">
+              <%= image_tag "ceo.png", class:"rounded-circle img-fluid z-depth-1 shadow-lg", alt:"ceo avatar" %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!--ceo-->
+
+<!--Despacho-->
+<div class=" my-5 p-5 z-depth-1 unique-color-dark bg-light">
+
+
+  <!--Section: Content-->
+  <section class="text-center white-text">
+
+    <!-- Section heading -->
+    <h2 class="font-weight-bold mb-4 pb-2 text-uppercase">Despacho y Entrega </h2>
+    <!-- Section description -->
+    <p class="lead mx-auto mb-5">Nuestros despachos son personalizados dentro de la IV region tanto en La Serena como en Coquimbo,
+    los productos son llevados por su propia CEO con la disponibilidad de llevar distintas tallas por si tiene problemas para identificar
+    la propia.<br> Por otra parte en los despachos inter-regionales se envian via Pullman Cargo o Starken, estan disponibles ambas opciones.</p>
+
+    <!-- Grid row -->
+    <div class="row justify-content-center">
+
+      <!-- Grid column -->
+      <div class="col-md-5 m-3 bg-warning rounded shadow-lg pt-3">
+
+        <i class="fa fa-truck fa-2x purple-text"></i>
+        <%= image_tag "pullman.png", class:"w-25 image-fluid"%>
+        <p class="mb-md-0 mb-5 p-3 text-primary">Pullman Cargo es la principal empresa que ustilizamos para los despachos entre Regiones por su rapidez y precio.
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-5 m-3 bg-success rounded shadow-lg pt-3">
+
+        <i class="fa fa-truck fa-2x purple-text"></i>
+        <%= image_tag "starken.png", class:"w-25 image-fluid"%>
+        <p class="mb-md-0 mb-5 p-3 text-white">Starken es nuestra empresa de Backup, la usamos como alternativa a Pullman ya que sus precios son un poco mas elevados .
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+<!--Despacho-->
+
+<!--Pasos-->
+<div class="container py-5 my-5 z-depth-1">
+  <section class="p-md-3 mx-md-5 text-lg-left">
+    <h2 class="font-weight-bold text-center mb-5 pb-3">Compra en 4 Pasos...</h2>
+    <div class="row text-center d-flex justify-content-center">
+      <div class="col-lg-3 col-md-6 mb-lg-0 mb-5">
+        <i class="fa fa-cart-plus fa-3x text-success mb-4"></i>
+        <h4 class="font-weight-bold mb-4">Paso 1</h4>
+        <p class="text-muted px-2 mb-lg-0">
+          Vitrinea y llena tu Carro.
+        </p>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-lg-0 mb-5">
+        <i class="fa fa-check-square-o fa-3x text-primary mb-4"></i>
+        <h4 class="font-weight-bold mb-4">Paso 2</h4>
+        <p class="text-muted px-2 mb-lg-0">
+          Checkear tus datos, seleccionar el despacho y la forma de pago.
+        </p>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-md-0 mb-5">
+        <i class="fa fa-map fa-3x text-danger amber-text mb-4"></i>
+        <h4 class="font-weight-bold mb-4">Paso 3</h4>
+        <p class="text-muted px-2 mb-md-0">
+          Coordinar la entrega u envio.
+        </p>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-md-0 mb-5">
+        <i class="fa fa-smile-o fa-3x text-info green-text mb-4"></i>
+        <h4 class="font-weight-bold mb-4">Paso 4</h4>
+        <p class="text-muted px-2 mb-md-0">
+          Disfrutar de tu JEANS.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+<!--Pasos-->
+
+<!--Footer-->
+<div class="container-fluid bg-dark mb-5">
+
+ 
+    <!--Section: Content-->
+    <section class="px-md-5 mx-md-5 py-5 text-center text-50 text-white  z-depth-1 rounded">
+
+      <h5 class="">Jeans Lover Shop <i class="fa fa-heart text-danger mx-1"></i> Sitio Creado por Alvaro Rivas</h5>
+
+    </section>
+    <!--Section: Content-->
+
+
+</div>
+<!--Footer-->

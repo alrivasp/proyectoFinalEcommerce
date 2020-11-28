@@ -1,15 +1,64 @@
 <div>
-    <div class="row">
+    <!--Fila-->
+    <div class="row align-items-start">
+        <!--columna fotos carrusel-->
         <div class="col-6">
-            <%= image_tag "https://dafitistaticcl-a.akamaihd.net/p/efesis-8790-143835-1-product.jpg", class:"w-50" %>
+
+          <div class="container mt-5">
+            <div class="carousel-container position-relative row">
+
+            <!-- Sorry! Lightbox doesn't work - yet. -->
+
+              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="contenedor-ppal-hd">
+
+
+                </div>
+              </div>
+
+              <!-- Carousel Navigation -->
+              <div id="carousel-thumbs" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="row mx-0" id="contenedor-ppal-sd">
+
+
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carousel-thumbs" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-thumbs" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+
+            </div> <!-- /row -->
+          </div> <!-- /container -->
+
+
+        </div>
+        <!--columna foto-->
+
+        <!--columna detalle-->
+        <div class="col-5" id="bodyProduct">
             
         </div>
-        <div class="col-6" id="bodyProduct">
-            
-        </div>
+        <!--columna detalle-->
     </div>
+    <!--Fila-->
+
     <hr>
+    
+    <!--Comentarios-->
     <div>
-        <div><div>
+        <div id="form-comment-product">
+        </div>
+        <div id="comment-product-reviews">
+        </div>
     </div>
+    <!--Comentarios-->
 </div>

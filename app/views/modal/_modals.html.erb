@@ -61,7 +61,7 @@
 
 <!-- Modal producto-->
 <div class="modal fade" id="modalProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalProductLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-header bg-danger">
         <h6 class="modal-title text-white" id="modalProductLabel">Modal title</h6>
@@ -78,6 +78,27 @@
     </div>
   </div>
 </div>
+
+<!-- Modal mensaje -->
+<div class="modal fade" id="modalMessageDefault" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalMessageDefaultLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h6 class="modal-title text-white" id="modalMessageDefaultLabel">Modal title</h6>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="bodyModalMessageDefault">
+        
+      </div>
+      <div class="modal-footer" id="footerModalMessageDefault" >
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Modal administrador  producto-->
 <div class="modal fade" id="modalProductmanager" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalProductmanagerLabel" aria-hidden="true">
@@ -525,7 +546,7 @@
               <hr>
               <button type="button" class="btn btn-primary float-right m-1" data-dismiss="modal">Cerrar</button>
               <%= submit_tag "Siguiente", class:"btn btn-success float-right m-1", data: {disable_with: "Procesando Compra..."} %>
-          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

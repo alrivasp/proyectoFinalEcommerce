@@ -1,0 +1,18 @@
+<div>
+    <h5 class="text-center">Comentarios del Producto</h5>
+    <%if user_signed_in? %>
+        <br/>
+        <div class="bg-secondary mb-4 p-3 rounded shadow-lg">
+          <%= form_tag( comment_products_path, method: "get", remote: true) do %>
+              <%= text_field_tag :product_id, params[:product_id] , id: :input_product_id_cart_comment %>
+              <%= text_field_tag :title_review, params[:title] , id: :input_title_review , class:"form-control mb-1", placeholder:"Titulo...", :required => true %>
+              <%= text_area_tag :body_review, params[:body] , id: :input_body_review, class:"form-control", placeholder:"Comentario...", :required => true %>
+              <%= submit_tag "Comentar", class:"btn btn-dark btn-block btn-sm mt-2 ", data: {disable_with: "Comentando..."} %>
+          <% end %>
+        </div>
+    <% end %>
+
+    <div class="container my-4" id="container-detail-reviews">
+      
+    </div>
+</div>

@@ -1,43 +1,200 @@
-//limpiarCampos
-$('#modalProductLabel').text("")
-$('#bodyModalProduct').text("")
-$('#footerModalProduct').text("")
-//Llenar campos
+<% if @type == 'ver' %>
+    //limpiarCampos
+    $('#modalProductLabel').text("")
+    $('#bodyModalProduct').text("")
+    $('#footerModalProduct').text("")
+    
 
-    <% if @type == 'ver' %>
-    //Titulo
+    
+    
+    //Titulo Modal
     $('#modalProductLabel').html("<strong> <%= @product.name.html_safe %>  </strong>")
-    //Cuerpo
+    //Renderizar template detail product
     $(document.createElement('div')).html("<%= j render 'detailProduct' %>").appendTo("#bodyModalProduct");
+    //Carrusel fotos
+    <% if @product.galery.attached? %>
+        <% @product.galery.each_with_index do |photo, index|%>
+            <% if index == 0 %>
+                $(document.createElement('div')).addClass("carousel-item active")
+                                                .attr("data-slide-to", "<%= index %>")
+                                                .attr("id", "carr-hd-<%= index %>")
+                                                .appendTo("#contenedor-ppal-hd");
+                img =  '<%= image_tag  photo.variant(resize: "367x549"), class:"d-block w-100","data-type" => "image", "data-toggle" => "lightbox", "data-gallery" => "example-gallery" %>'
+                $("#carr-hd-<%= index %>").html(img)
+                ///
+                $(document.createElement('div')).addClass("thumb col-4 col-sm-2 px-1 py-2")
+                                                .attr("data-target", "#myCarousel")
+                                               .attr("data-slide-to", "<%= index %>")
+                                                .attr("id", "carousel-selector-<%= index %>")
+                                                .appendTo("#contenedor-ppal-sd");
+                img =  '<%= image_tag  photo.variant(resize: "183x174"), class:"img-fluid" %>'
+                $("#carousel-selector-<%= index %>").html(img)
+            <% else %>
+                $(document.createElement('div')).addClass("carousel-item")
+                                                .attr("data-slide-to", "<%= index %>")
+                                                .attr("id", "carr-hd-<%= index %>")
+                                                .appendTo("#contenedor-ppal-hd");
+                img =  '<%= image_tag  photo.variant(resize: "367x549"), class:"d-block w-100","data-type" => "image", "data-toggle" => "lightbox", "data-gallery" => "example-gallery" %>'
+                $("#carr-hd-<%= index %>").html(img)
+                ///
+                $(document.createElement('div')).addClass("thumb col-4 col-sm-2 px-1 py-2")
+                                                .attr("data-target", "#myCarousel")
+                                               .attr("data-slide-to", "<%= index %>")
+                                                .attr("id", "carousel-selector-<%= index %>")
+                                                .appendTo("#contenedor-ppal-sd");
+                img =  '<%= image_tag  photo.variant(resize: "183x174"), class:"img-fluid" %>'
+                $("#carousel-selector-<%= index %>").html(img)
+            <% end %>
+        <% end  %>
+    <% else %>
 
+    <% end  %>
+    
+
+    //Titulo Producto
     $(document.createElement('h1')).html("<%= @product.name.html_safe %>").appendTo("#bodyProduct");
     $(document.createElement('br')).appendTo("#bodyProduct");
-    $(document.createElement('p')).html("<strong>Descripcion:</strong><%= @product.description.html_safe %>").appendTo("#bodyProduct");
-    $(document.createElement('p')).html("<strong>Modelo:</strong><%= @product.model_product.name.html_safe %>").appendTo("#bodyProduct");
-    $(document.createElement('p')).html("<strong>Marca:</strong><%= @product.model_product.mark.name.html_safe %>").appendTo("#bodyProduct");
-    $(document.createElement('p')).html("<strong>Categoria:</strong><%= @product.category.name.html_safe %>").appendTo("#bodyProduct");
-        
-    <% @variants.each do |variant|%>
-        $(document.createElement('span')).html("<strong>Stock:</strong><%= variant.stock %>").appendTo("#bodyProduct");
+
+    $(document.createElement('p')).html("<strong>Descripcion: </strong><%= @product.description.html_safe %>").appendTo("#bodyProduct");
+    $(document.createElement('p')).html("<strong>Modelo: </strong><%= @product.model_product.name.html_safe %>").appendTo("#bodyProduct");
+    $(document.createElement('p')).html("<strong>Marca: </strong><%= @product.model_product.mark.name.html_safe %>").appendTo("#bodyProduct");
+    $(document.createElement('p')).html("<strong>Categoria: </strong><%= @product.category.name.html_safe %>").appendTo("#bodyProduct");
+    $(document.createElement('hr')).appendTo("#bodyProduct");
+    <% @variants.each_with_index do |variant, index|%>
+        $(document.createElement('span')).html("<strong>Stock: </strong><%= variant.stock %>").appendTo("#bodyProduct");
         $(document.createElement('i')).html("      ").appendTo("#bodyProduct");
-        $(document.createElement('i')).html("<strong>Talla:</strong> <%= variant.size_product.name %>").appendTo("#bodyProduct");
+        $(document.createElement('i')).addClass("btn btn-danger btn-sm rounded-pill h6").html("<strong>Talla :</strong> <%= variant.size_product.name %>").appendTo("#bodyProduct");
+        $(document.createElement('i')).addClass("ml-2").attr("id","btn-add-product-container-<%= index %>").appendTo("#bodyProduct");
+        btn =  '<%= link_to " Agregar" , add_product_products_path(@product, variant), remote: true, method: :post, data: { disable_with: "Agregando..." }, class:"fa fa-cart-plus fa-3x btn btn-dark btn-sm rounded-pill h6" %>'
+        $("#btn-add-product-container-<%= index %>").html(btn)
         $(document.createElement('br')).appendTo("#bodyProduct");
     <% end %>
-    $(document.createElement('br')).appendTo("#bodyProduct");
-    $(document.createElement('h2')).html("<strong>Total: </strong><%= number_to_currency(@product.price ,unit: '$', :precision => 0, format: '%u %n') %>").appendTo("#bodyProduct");
-    $(document.createElement('p')).html("<strong>Popularidad: </strong>").appendTo("#bodyProduct");
-    $(document.createElement('span')).html("<strong>Agrege una Nota para este Producto: </strong><select name='points'><option>1</option><option>2</option>3<option>4</option><option>5</option></select> ").appendTo("#bodyProduct");
+    $(document.createElement('hr')).appendTo("#bodyProduct");
+    $(document.createElement('h2')).html("<strong>Precio: </strong><%= number_to_currency(@product.price ,unit: '$', :precision => 0, format: '%u %n') %>").appendTo("#bodyProduct");
+    $(document.createElement('hr')).appendTo("#bodyProduct");
+    //popularidad
+    <% point = @product.reviews.average(:punctuation).to_i %>
+    $(document.createElement('p')).attr("id","punctiation-change").appendTo("#bodyProduct");
+    $(document.createElement('i')).html("<strong>Popularidad: </strong>").appendTo("#punctiation-change");
+    <% point.times do |i|%>
+        $(document.createElement('i')).addClass("fa fa-star text-warning")
+                                      .attr("aria-hidden","true")
+                                      .appendTo("#punctiation-change");
+    <% end %>
+    <% star = 5 - point%>
+    <% star.times do |i|%>
+        $(document.createElement('i')).addClass("fa fa-star text-secondary")
+                                      .attr("aria-hidden","true")
+                                      .appendTo("#punctiation-change");
+    <% end %>
+    //popularidad
+
+    $(document.createElement('div')).html("<%= j render 'punctiationProduct' %>").appendTo("#bodyProduct");
+    $('#input_product_id_cart').hide("")
     
-    //Footer
-    
-    <% elsif @type == 'cancelar' %>
-    //Titulo
-   
-    //Body
-    
-    //Footer
-   
+//Comentarios
+    $(document.createElement('div')).html("<%= j render 'reviewProduct' %>").appendTo("#comment-product-reviews");
+   $('#input_product_id_cart_comment').hide("");
+
+    $("#container-detail-reviews").text("");
+    <% @product.reviews.order(created_at: :desc).each_with_index do |review, index| %>
+        $(document.createElement('div')).addClass("row m-4 p-3 rounded-pill shadow-lg").attr("id", "review-<%= index %>").appendTo("#container-detail-reviews");
+        <% if review.user.avatar.attached? %>
+            $(document.createElement('div')).addClass("col-3").attr("id", "image-review-<%= index %>").appendTo("#review-<%= index %>");
+            img = '<%= image_tag (review.user.avatar.variant(resize: "120x120") ), class:"shadow-lg rounded-circle d-flex mr-3"%>'
+            $("#image-review-<%= index %>").html(img);
+    //media body
+            $(document.createElement('div')).addClass("col-9").attr("id", "body-review-<%= index %>").appendTo("#review-<%= index %>");
+        //nombre
+            $(document.createElement('h6')).addClass("font-weight-bold")
+                                            .html("<%= review.user.user_name %>")
+                                           .appendTo("#body-review-<%= index %>");
+            
+        //popularidad
+            <% point_review = review.punctuation %>
+            $(document.createElement('span')).addClass("")
+                                            .attr("id", "punctiation-review-<%= index %>")
+                                            .appendTo("#body-review-<%= index %>");
+            
+            <% point_review.times do |i|%>
+                $(document.createElement('i')).addClass("fa fa-star text-warning")
+                                              .attr("aria-hidden","true")
+                                              .appendTo("#punctiation-review-<%= index %>");
+            <% end %>
+            <% star_review = 5 - point_review%>
+            <% star_review.times do |i|%>
+                $(document.createElement('i')).addClass("fa fa-star text-secondary")
+                                              .attr("aria-hidden","true")
+                                              .appendTo("#punctiation-review-<%= index %>");
+            <% end %>
+        //fecha
+        $(document.createElement('br')).appendTo("#body-review-<%= index %>");
+        $(document.createElement('span')).addClass("text-muted font-size-review")
+                                            .html("<i class='fa fa-clock-o mr-2' aria-hidden='true'></i> <%= review.created_at.strftime("%d-%m-%Y") %>")
+                                           .appendTo("#body-review-<%= index %>");
+        $(document.createElement('br')).appendTo("#body-review-<%= index %>");
+        $(document.createElement('span')).addClass("text-muted font-size-review")
+                                            .html("<strong><%= review.title %></strong> :  ")
+                                           .appendTo("#body-review-<%= index %>");
+        
+        $(document.createElement('span')).addClass("text-muted font-size-review-body")
+                                            .html("<%= review.body %>.-")
+                                           .appendTo("#body-review-<%= index %>");
+        <% else %>
+            $(document.createElement('div')).addClass("col-3").attr("id", "image-review-<%= index %>").appendTo("#review-<%= index %>");
+            img = '<%= image_tag("perfil", class:"rounded-circle photo-reviews shadow-lg" )%>'
+            $("#image-review-<%= index %>").html(img);
+    //media body
+            $(document.createElement('div')).addClass("col-9").attr("id", "body-review-<%= index %>").appendTo("#review-<%= index %>");
+        //nombre
+            $(document.createElement('h6')).addClass("font-weight-bold")
+                                            .html("<%= review.user.user_name %>")
+                                           .appendTo("#body-review-<%= index %>");
+            
+        //popularidad
+            <% point_review = review.punctuation %>
+            $(document.createElement('span')).addClass("")
+                                            .attr("id", "punctiation-review-<%= index %>")
+                                            .appendTo("#body-review-<%= index %>");
+            
+            <% point_review.times do |i|%>
+                $(document.createElement('i')).addClass("fa fa-star text-warning")
+                                              .attr("aria-hidden","true")
+                                              .appendTo("#punctiation-review-<%= index %>");
+            <% end %>
+            <% star_review = 5 - point_review%>
+            <% star_review.times do |i|%>
+                $(document.createElement('i')).addClass("fa fa-star text-secondary")
+                                              .attr("aria-hidden","true")
+                                              .appendTo("#punctiation-review-<%= index %>");
+            <% end %>
+        //fecha
+        $(document.createElement('br')).appendTo("#body-review-<%= index %>");
+        $(document.createElement('span')).addClass("text-muted font-size-review")
+                                            .html("<i class='fa fa-clock-o mr-2' aria-hidden='true'></i> <%= review.created_at.strftime("%d-%m-%Y") %>")
+                                           .appendTo("#body-review-<%= index %>");
+        $(document.createElement('br')).appendTo("#body-review-<%= index %>");
+        $(document.createElement('span')).addClass("text-muted font-size-review")
+                                            .html("<strong><%= review.title %></strong> :  ")
+                                           .appendTo("#body-review-<%= index %>");
+        
+        $(document.createElement('span')).addClass("text-muted font-size-review-body")
+                                            .html("<%= review.body %>.-")
+                                           .appendTo("#body-review-<%= index %>");
+            
+        <% end %>
     <% end %>
 
+    //Subir Modal
+    $("#modalProduct").modal("show")
+    
+<% elsif @type == 'add' %>
+//Titulo
 
-$("#modalProduct").modal("show")
+//Body
+
+//Footer
+
+<% end %>
+
+

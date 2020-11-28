@@ -67,6 +67,9 @@ Rails.application.routes.draw do
   #products
   get 'products/main'
   get 'get_product/:product_id/:option', to: 'products#get_product', as: 'get_product_info'
+  get 'punctiation_products', to: 'products#punctiation_product', as: "punctiation_products"
+  post 'add_product/:product_id/:variant_id', to: 'products#add_product', as: "add_product_products"
+  get 'comment_products', to: 'products#comment_product', as: "comment_products"
   ###############################################################################################################################
   #Accounts
   get 'accounts/dashboard_admin'
