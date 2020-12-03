@@ -49,6 +49,22 @@ document.addEventListener('turbolinks:load', function(){
         $("#submit_search_variant").trigger("click");
     })
 
+    //search product ppal
+    $( "#select_filter_search" ).change(function(){
+      $("#submit_filter_active").trigger("click");
+    })
+
+    //search product ppal
+    $( "#select_filter_search" ).change(function(){
+      $("#submit_filter_active").trigger("click");
+    })
+    $("#input_chat_admin").keypress(function(e) {
+      if(e.which == 13) {
+        $("#submit_chat_admin").trigger("click");
+      }
+    });
+
+    $('#input_user_id_message_rom').hide("")
    /////
 
    $('#myCarousel').carousel({
@@ -88,18 +104,7 @@ document.addEventListener('turbolinks:load', function(){
     $('[id=carousel-selector-'+id+']').addClass('selected');
   });
   // when user swipes, go next or previous
-  $('#myCarousel').swipe({
-    fallbackToMouseEvents: true,
-    swipeLeft: function(e) {
-      $('#myCarousel').carousel('next');
-    },
-    swipeRight: function(e) {
-      $('#myCarousel').carousel('prev');
-    },
-    allowPageScroll: 'vertical',
-    preventDefaultEvents: false,
-    threshold: 75
-  });
+ 
   /*
   $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     event.preventDefault();
@@ -112,5 +117,5 @@ document.addEventListener('turbolinks:load', function(){
     if (src) $(this).ekkoLightbox();
   });
 
-  
+
 })

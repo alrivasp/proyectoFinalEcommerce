@@ -14,15 +14,13 @@ $(document.createElement('button'))
                                     .text("Aceptar")
                                     .appendTo("#footerModalMessageDefault");
  
-    <% if current_user.orders.last.order_histories.last.order_status_id == 1 %>
+    
         <% aux = current_user.orders.last.order_items.count %>
         $(document.createElement("span"))
                                         .addClass("badge badge-pill badge-danger accesos-iconos-badge")
                                         .html("<%= aux %>")
                                         .appendTo("#numeric-cart");
-
- 
- <% end %>
+    
 
 
                                     

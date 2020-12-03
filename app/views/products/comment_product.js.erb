@@ -2,6 +2,7 @@ $('#input_title_review').val("");
 $('#input_body_review').val("");
 
 $("#container-detail-reviews").text("");
+<%if !@comment.nil? %>
     <% @product.reviews.order(created_at: :desc).each_with_index do |review, index| %>
         $(document.createElement('div')).addClass("row m-4 p-3 rounded-pill shadow-lg").attr("id", "review-<%= index %>").appendTo("#container-detail-reviews");
         <% if review.user.avatar.attached? %>
@@ -20,11 +21,14 @@ $("#container-detail-reviews").text("");
             $(document.createElement('span')).addClass("")
                                             .attr("id", "punctiation-review-<%= index %>")
                                             .appendTo("#body-review-<%= index %>");
-            
-            <% point_review.times do |i|%>
-                $(document.createElement('i')).addClass("fa fa-star text-warning")
-                                              .attr("aria-hidden","true")
-                                              .appendTo("#punctiation-review-<%= index %>");
+            <% if !point_review.nil? %>
+                <% point_review.times do |i|%>
+                    $(document.createElement('i')).addClass("fa fa-star text-warning")
+                                                  .attr("aria-hidden","true")
+                                                  .appendTo("#punctiation-review-<%= index %>");
+                <% end %>
+            <% else %>
+                <% point_review = 0 %>
             <% end %>
             <% star_review = 5 - point_review%>
             <% star_review.times do |i|%>
@@ -62,10 +66,15 @@ $("#container-detail-reviews").text("");
                                             .attr("id", "punctiation-review-<%= index %>")
                                             .appendTo("#body-review-<%= index %>");
             
-            <% point_review.times do |i|%>
-                $(document.createElement('i')).addClass("fa fa-star text-warning")
-                                              .attr("aria-hidden","true")
-                                              .appendTo("#punctiation-review-<%= index %>");
+            
+            <% if !point_review.nil? %>
+                <% point_review.times do |i|%>
+                    $(document.createElement('i')).addClass("fa fa-star text-warning")
+                                                  .attr("aria-hidden","true")
+                                                  .appendTo("#punctiation-review-<%= index %>");
+                <% end %>
+            <% else %>
+                <% point_review = 0 %>
             <% end %>
             <% star_review = 5 - point_review%>
             <% star_review.times do |i|%>
@@ -89,3 +98,4 @@ $("#container-detail-reviews").text("");
             
         <% end %>
     <% end %>
+<% end %>

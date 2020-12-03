@@ -1,2 +1,13 @@
 $("#item_List_cart").html("");
 $("#item_List_cart").html(" <%= j render partial: 'item', collection: @items %>");
+
+
+        $('#numeric-cart').text("")
+        $(document.createElement("span"))
+                                        .addClass("badge badge-pill badge-danger accesos-iconos-badge")
+                                        .html("0")
+                                        .appendTo("#numeric-cart");
+
+$('#in_progress_total').text("")
+$('#btn-in-progress').text("")
+     

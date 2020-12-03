@@ -8,7 +8,10 @@
   <td><%= order.order_histories.last.order_status.name %></td>
   <td>
       <%= link_to "Detalle Orden", get_order_info_path(order, "ver"), remote:true, class:"btn btn-success  btn-sm" %>
-      <% if order.order_histories.last.order_status.id == 1 %>
+      
+  </td>
+  <td>
+    <% if order.order_histories.last.order_status.id == 1 %>
         <%= link_to "Cancelar Orden", get_order_info_path(order, "cancelar"), remote:true,class:"btn btn-danger  btn-sm" %>
       <% else %>
         <%= link_to "Ver Hisotia OC", get_order_info_path(order, "historia"), remote:true,class:"btn btn-danger  btn-sm" %>

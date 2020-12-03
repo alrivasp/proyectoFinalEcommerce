@@ -8,8 +8,14 @@
   <td class="align-middle"><%= order.order_status.name %></td>
   <td class="align-middle">
     <%= link_to "Ver OC", get_ordermanager_info_path(order.order, 'ver'), remote:true, class:"btn btn-success  btn-sm" %>
+  </td>
+  <td class="align-middle">
+    <%= link_to "Cliente", get_profile_info_path(order.order.user, 'ver'), remote:true, class:"btn btn-success  btn-sm" %>
+  </td>
+  <td >
     <%= link_to "Historia OC", get_ordermanager_info_path(order.order, 'historia'), remote:true, class:"btn btn-success  btn-sm" %>
-    
+  </td>
+  <td class="align-middle">
     <% if order.order_status_id == 1 %>
       <%= link_to "Cancelar OC", get_ordermanager_info_path(order.order, 'cancel'), remote:true, class:"btn btn-danger btn-sm" %>
     <% elsif order.order_status_id == 2 || order.order_status_id == 3 || order.order_status_id == 4 || order.order_status_id == 5 %>

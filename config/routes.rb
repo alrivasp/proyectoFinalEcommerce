@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  #Mensajeria Chat
+  get 'rooms/show_admin'
+  get 'rooms/show_user'
+  get 'rooms/messenger_admin'
+  get 'rooms/messenger_user'
+  get 'get_rooms/:user_id', to: 'rooms#get_messenger_info', as: 'get_messenger_info_rooms'
+  get 'notification_rooms', to: 'rooms#notification_message', as: "notification_message_rooms"
+  get 'notification_user_rooms', to: 'rooms#notification_user_message', as: "notification_user_message_rooms"
   #Administrador de Ordenes
   get 'ordermanager/main'
   get 'ordermanager/in_progress_orders'
@@ -49,7 +57,7 @@ Rails.application.routes.draw do
   post 'checkout_pay_sale', to: 'cart#checkout_pay_sale', as: 'checkout_pay_sale_cart'
   post 'checkout_summary_sale', to: 'cart#checkout_summary_sale', as: 'checkout_summary_sale_cart'
   post 'checkout_end_sale/:payment_method_id', to: 'cart#checkout_end_sale', as: 'checkout_end_sale_cart'
-  post 'checkout_paypal_sale', to: 'cart#checkout_paypal_sale', as: 'checkout_paypal_sale_cart'
+  get 'success_sale/:order_id', to: 'cart#success_sale', as: 'success_sale_cart'
   ###############################################################################################################################
   #Shopping
   get 'shopping/main'
@@ -70,6 +78,8 @@ Rails.application.routes.draw do
   get 'punctiation_products', to: 'products#punctiation_product', as: "punctiation_products"
   post 'add_product/:product_id/:variant_id', to: 'products#add_product', as: "add_product_products"
   get 'comment_products', to: 'products#comment_product', as: "comment_products"
+  get 'search_products', to: 'products#search_product', as: 'search_product_products'
+  get 'filter_products', to: 'products#filter_product', as: 'filter_product_products'
   ###############################################################################################################################
   #Accounts
   get 'accounts/dashboard_admin'
@@ -93,6 +103,8 @@ Rails.application.routes.draw do
   ###############################################################################################################################
   #Home
   get 'home/index'
+  get 'home/tallas'
+  get 'home/contacto'
   ###############################################################################################################################
   #Default
   root 'home#index'

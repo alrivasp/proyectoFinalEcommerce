@@ -1,0 +1,30 @@
+<div class="text-center pt-5 mb-5 ">
+    <%= image_tag "banner_success", class:"title-talla "%>
+    <div class="row justify-content-center ml-5 mr-5 pl-5 pr-5">
+        <div class="col-6  ml-5 mr-5 pl-5 pr-5 mt-5 mb-5">
+            <h4 class="float-left">Estimado <%= current_user.name %> <%= current_user.last_name %>,</h4><br/><br/>
+            <p class="float-left">Su pedido con la orden <strong><%= @order.number%> </strong> se realizo con exito, y paso a estado pendiente de (entrega o despacho),
+            nos contactaremos con usted para coordinar la (entrga o envio) del o los productos solicitados
+            de igual manera se envio un correo cofirmando la compra realizada le agradecemos por su compra
+            y por preferir nuestros productos !!!!Muchas gracias...</p>
+            <p class="float-left">Atentamente Equipo Jeans Lovers Shop.-
+            <%= image_tag "jls_logo_", class:"title-talla text-center w-25"%>
+        </div>
+    </div>
+    <!--Footer-->
+    <div class="container-fluid bg-dark mt-5">
+
+    
+        <!--Section: Content-->
+        <section class="px-md-5 mx-md-5 py-5 text-center text-50 text-white  z-depth-1 rounded">
+
+          <h5 class="">Jeans Lover Shop <i class="fa fa-heart text-danger mx-1"></i> Sitio Creado por Alvaro Rivas</h5>
+
+        </section>
+        <!--Section: Content-->
+
+
+    </div>
+    <!--Footer-->
+
+</div>

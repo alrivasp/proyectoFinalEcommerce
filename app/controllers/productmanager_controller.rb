@@ -1,23 +1,28 @@
 class ProductmanagerController < ApplicationController
   def main
+    authorize! :main_productmanager, :logs
   end
 
   def active_products
+    authorize! :active_products_productmanager, :logs
     #@products = Product.joins(:variants).where(available: true)
     @products = Product.where(available: true).order(sku: :desc)
   end
 
   def inactive_products
+    authorize! :inactive_products_productmanager, :logs
     @products = Product.where(available: false).order(sku: :desc)
   end
 
   def get_productmanager
+    authorize! :get_productmanager_productmanager, :logs
     @product = Product.find(params[:product_id])
     @type = params[:option]
     @variants = Variant.where(product_id: @product.id)
   end
 
   def activate
+    authorize! :activate_productmanager, :logs
     sleep 2
     product = Product.find(params[:product_id])
     product.available = true
@@ -26,6 +31,7 @@ class ProductmanagerController < ApplicationController
   end
 
   def inactivate
+    authorize! :inactivate_productmanager, :logs
     sleep 2
     product = Product.find(params[:product_id])
     product.available = false
@@ -34,6 +40,7 @@ class ProductmanagerController < ApplicationController
   end
 
   def update
+    authorize! :update_productmanager, :logs
     product = Product.find(product_params[:id])
     @products_active = Product.where(available: true).order(sku: :desc)
     @products_inactive = Product.where(available: false).order(sku: :desc)
@@ -47,6 +54,7 @@ class ProductmanagerController < ApplicationController
   end
 
   def create
+    authorize! :create_productmanager, :logs
     @message = ""
     aux = product_params[:sku].upcase
     @flag = false
@@ -73,10 +81,12 @@ class ProductmanagerController < ApplicationController
   end
 
   def variant_products
+    authorize! :variant_products_productmanager, :logs
     @variants = Variant.all
   end
   
   def get_variant_productmanager
+    authorize! :get_variant_productmanager_productmanager, :logs
     @variant = Variant.find(params[:variant_id])
     @product = Product.find(@variant.product_id)
     @type = params[:option]
@@ -84,6 +94,7 @@ class ProductmanagerController < ApplicationController
   end
 
   def create_variant
+    authorize! :create_variant_productmanager, :logs
     sleep 2
     @flag = false
     Variant.where(product_id: variant_params[:product_id] , size_product_id: variant_params[:size_product_id]).length == 0 ? @flag = false : @flag = true
@@ -99,6 +110,7 @@ class ProductmanagerController < ApplicationController
   end
 
   def update_variant
+    authorize! :update_variant_productmanager, :logs
     variant = Variant.find(variant_params[:id])
     @products_active = Product.where(available: true).order(sku: :desc)
     @products_inactive = Product.where(available: false).order(sku: :desc)
@@ -113,6 +125,7 @@ class ProductmanagerController < ApplicationController
   end
 
   def search_inactive
+    authorize! :search_inactive_productmanager, :logs
     respond_to do |format|
       if params[:search]
         @products = Product.where(available: false).where('sku LIKE ?', "%#{params[:search]}%").order(sku: :desc)
@@ -125,7 +138,7 @@ class ProductmanagerController < ApplicationController
   end
 
   def search_active
-    
+    authorize! :search_active_productmanager, :logs
     respond_to do |format|
       if params[:search]
         @products = Product.where(available: true).where('sku LIKE ?', "%#{params[:search]}%").order(sku: :desc)
@@ -138,6 +151,7 @@ class ProductmanagerController < ApplicationController
   end
 
   def search_variant
+    authorize! :search_variant_productmanager, :logs
     respond_to do |format|
       if params[:search].length
         @variants = Variant.joins(:product).where('products.sku like ?', "%#{params[:search]}%").order(sku: :desc)

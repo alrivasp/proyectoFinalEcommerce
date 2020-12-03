@@ -1,0 +1,6 @@
+$('#notication-messenger-admin').text("")
+name = '<%= @user.name %> <%= @user.last_name %>'
+$("#name-user").html(name);
+$("#notication-messenger-admin").html("<%= j render partial: "notification", collection: @notifications %>");
+$("#input_user_id_message_rom").val("<%= @user.id %>")
+$("#input_chat_admin").val("")

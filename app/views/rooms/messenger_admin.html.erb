@@ -1,0 +1,88 @@
+    <div class="text-center pt-4 mb-2 ">
+        <%= image_tag "banner_mensajeria", class:"title-talla "%>
+    </div>
+<div class="container-msg">
+<div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h4>Recent</h4>
+            </div>
+            <div class="srch_bar">
+              <div class="stylish-input-group">
+                <input type="text" class="search-bar"  placeholder="Search" >
+                <span class="input-group-addon">
+                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span> </div>
+            </div>
+          </div>
+        <!--Pila de usuarios-->
+          <div class="inbox_chat">
+            <% @users.each_with_index do |user, index| %>
+            <%= link_to get_messenger_info_rooms_path(user),remote: true, :class => "" do %>
+                <% unless user.id == 2 %>
+                  <div id="chat-list" class="chat_list ">
+                      <div class="chat_people">
+                        <div class="chat_img">
+                            <% if user.avatar.attached? %>
+                                <%= image_tag user.avatar %> 
+                            <% else %>
+                                <%= image_tag "perfil" %> 
+                            <% end %>
+                        </div>
+                        <div class="chat_ib">
+                          <% mensaje = Message.where(sender: user.id).last %>
+                          <h5><%= user.user_name %>
+                          <% if !mensaje.nil? %>
+                           <span class="chat_date"><%= mensaje.created_at.strftime("%H:%M")%> | <%= mensaje.created_at.strftime("%d-%m-%Y")%></span></h5>
+                            <p><%= mensaje.content%></p>
+                          <% else %>
+                            <p> Sin mensajes enviados</p>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                <% end %>
+            <% end %>
+            <% end %>
+          </div>
+          <!--Pila de usuarios-->
+        </div>
+        <div class="mesgs">
+          <p id="name-user"></p>
+          <div class="msg_history" id="notication-messenger-admin">
+                <%=  render partial: "notification", collection: @notifications %>
+          </div>
+          <!--Formulario de envio-->
+          <div class="type_msg">
+            <div class="input_msg_write">
+                <%= form_tag( notification_message_rooms_path, method: "get", remote: true, class:"input_msg_write") do %>
+                  <%= text_field_tag :user_id, params[:user_id] , id: :input_user_id_message_rom, "type" => "hidden" %>
+                  <%= text_field_tag :msg_chat, params[:msg] , id: :input_chat_admin , class:"input_send_message", placeholder:"Ingrese Mensaje...", :required => true %>
+                  <%= submit_tag "".html_safe, class:"msg_send_btn", id: :submit_chat_admin %>
+                <% end %>
+            </div>
+          </div>
+          <!--Formulario de Envio-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+     <!--Footer-->
+    <div class="container-fluid bg-dark mt-2">
+
+    
+        <!--Section: Content-->
+        <section class="px-md-5 mx-md-5 py-5 text-center text-50 text-white  z-depth-1 rounded">
+
+          <h5 class="">Jeans Lover Shop <i class="fa fa-heart text-danger mx-1"></i> Sitio Creado por Alvaro Rivas</h5>
+
+        </section>
+        <!--Section: Content-->
+
+
+    </div>
+<!--Footer-->

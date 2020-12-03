@@ -1,9 +1,12 @@
 class OrdermanagerController < ApplicationController
+  
   def main
+    authorize! :main_ordermanager, :logs
   end
 
   #Vista principal
   def in_progress_orders
+    authorize! :in_progress_orders_ordermanager, :logs
     #capturar solo las id de las ordenes
     arr_orders = Order.pluck(:id)
     @orders = []
@@ -18,6 +21,7 @@ class OrdermanagerController < ApplicationController
   
   #Vista principal
   def pendig_orders
+    authorize! :pendig_orders_ordermanager, :logs
     #capturar solo las id de las ordenes
     arr_orders = Order.pluck(:id)
     @orders = []
@@ -32,6 +36,7 @@ class OrdermanagerController < ApplicationController
   
   #Vista principal
   def finished_orders
+    authorize! :finished_orders_ordermanager, :logs
     #capturar solo las id de las ordenes
     arr_orders = Order.pluck(:id)
     @orders = []
@@ -46,6 +51,7 @@ class OrdermanagerController < ApplicationController
   
   #Vista principal
   def canceled_orders
+    authorize! :finished_orders_ordermanager, :logs
     #capturar solo las id de las ordenes
     arr_orders = Order.pluck(:id)
     @orders = []
@@ -60,6 +66,7 @@ class OrdermanagerController < ApplicationController
 
   #backend seleccion de item
   def get_ordermanager
+    authorize! :get_ordermanager_ordermanager, :logs
     @order = Order.find(params[:order_id])
     @order_type = @order.order_type_id
     @order_items = OrderItem.where(order_id: params[:order_id])
@@ -69,6 +76,7 @@ class OrdermanagerController < ApplicationController
 
   #Boton cancelar
   def cancel_order
+    authorize! :cancel_order_ordermanager, :logs
     sleep 2
     #Crear registro
     cancel = OrderStatus.find(7)
@@ -88,7 +96,7 @@ class OrdermanagerController < ApplicationController
 
   #bonton cambio de orden pendiente
   def change_order
-
+    authorize! :change_order_ordermanager, :logs
     order = Order.find(params[:order_id].to_i)
     status = OrderStatus.find(params[:order_status_id][0].to_i)
 
@@ -101,6 +109,11 @@ class OrdermanagerController < ApplicationController
       elsif status.id == 8 || status.id == 4 || status.id == 5
         order.payments.first.status = "Pagado"
         order.save
+        #descontar stock
+        order.order_items.each do |item|
+          item.variant.stock -= 1
+          item.variant.save
+        end
       end
     end
      #capturar solo las id de las ordenes
@@ -117,6 +130,7 @@ class OrdermanagerController < ApplicationController
 
   #Backend Busqueda en curso
   def search_in_progress
+    authorize! :search_in_progress_ordermanager, :logs
     respond_to do |format|
       if params[:search]
         
@@ -150,6 +164,7 @@ class OrdermanagerController < ApplicationController
   
   #Backend Busqueda pendiente
   def search_pending
+    authorize! :search_pending_ordermanager, :logs
     respond_to do |format|
       if params[:search]
         #capturar solo las id de las ordenes
@@ -181,6 +196,7 @@ class OrdermanagerController < ApplicationController
 
   #Backend Busqueda finalizada
   def search_finished
+    authorize! :search_finished_ordermanager, :logs
     respond_to do |format|
       if params[:search]
         #capturar solo las id de las ordenes
@@ -212,6 +228,7 @@ class OrdermanagerController < ApplicationController
 
   #Backend Busqueda cancelada
   def search_canceled
+    authorize! :search_canceled_ordermanager, :logs
     respond_to do |format|
       if params[:search]
         #capturar solo las id de las ordenes

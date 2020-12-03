@@ -1,0 +1,26 @@
+<h1>Mensajeria con Jeans Lover Shop</h1>
+
+<div class="container-msg">
+  <div class="messaging">
+    <div class="inbox_msg">
+      <div class="mesgs">
+        <!--Envio de Mensaje-->
+        <div class="msg_history" id="messages">
+
+          <%= render @messages %>
+
+        </div>
+        <!--Envio de Mensaje-->
+        <!--Fomr de envio de mensaje-->
+        <div class="type_msg">
+          <div class="input_msg_write">
+            <form >
+                <input class="write_msg" placeholder="Escribe tu mensaje" type="text" data-behavior="room_speaker" data-sender="<%= current_user.id%>" data-received="2">
+            </form>
+          </div>
+        </div>
+        <!--Fomr de envio de mensaje-->
+      </div>
+    </div>
+  </div>
+</div>

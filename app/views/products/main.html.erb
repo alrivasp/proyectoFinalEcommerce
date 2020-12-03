@@ -1,10 +1,27 @@
 <div class="bg-product mb-5">
     <div class="mb-4 shadow-lg">
-        <%= image_tag "banner_jeans.jpg", class:"w-100"%>
+        <%= image_tag "banner_jeans.jpg", class:"banner-jeans"%>
         
     </div>
 
-    <div class ="row justify-content-center pb-3" id="list_product-ppal-free">
+    <!--Buscador-->
+    <div class="row justify-content-center mb-4 pt-3">
+        <div class="col-7 mb-1 ">
+            <%= form_tag( search_product_products_path, method: "get", remote: true, class:"d-flex input-group w-auto float-center", id: :form_active_search) do %>
+                <%= text_field_tag :search_product, params[:search_product] , placeholder:"Buscar x nombre de Producto...", class:"form-control rounded-pill shadow search-product-ppal", "aria-label" => "Search",id: :input_search_active %><i class="fa fa-search search-product-icon ml-2 mr-2 text-danger" aria-hidden="true"></i>
+	        	<%= submit_tag "Buscar", class:"btn btn-outline-primary btn-search-pm", "data-ripple-color" => "dark", id: :submit_search_active %>
+	        <% end %>
+        </div>
+        <div class="col-7  ">
+            <%= form_tag( filter_product_products_path, method: "get", remote: true, class:"d-flex input-group w-auto float-center", id: :form_product_search) do %>
+                <%= select(:filter_id, params[:filter_num], [['Mayor Precio', 1], ['Menor Precio', 2],['Mejor valorado', 3],['Mas antiguo', 4],['Mas Nuevo', 5]], {include_blank: "Filtrar"},{:required => true, class:'w-25 form-inline form-control rounded-pill shadow search-product-ppal',id: :select_filter_search}) %><i class="fa fa-filter search-product-icon ml-2 mr-2 text-danger" aria-hidden="true"></i>
+	        	<%= submit_tag "Buscar", class:"btn btn-outline-primary btn-search-pm search-product-ppal", "data-ripple-color" => "dark", id: :submit_filter_active %>
+	        <% end %>
+        </div>
+    </div>
+    <!--Buscador-->
+
+    <div class ="row justify-content-center pb-3 mb-5" id="list_product-ppal-free">
             <%= render partial: "product", collection: @products %>
     </div>
 

@@ -1,2 +1,43 @@
-<h1>Accounts#dashboard_admin</h1>
-<p>Find me in app/views/accounts/dashboard_admin.html.erb</p>
+<div class="text-center pt-5 mb-5 ">
+    <%= image_tag "banner_dashboard", class:"title-talla "%>
+    <div class="row m-4 justify-content-center">
+        <div class="col-3 rounded shadow-lg m-4">
+            <%= bar_chart @total_purshaces_day,prefix: "$",thousands: ".", messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Pesos", title: "$ Ventas Diaria"%>
+        </div>
+        <div class="col-3 rounded shadow-lg m-4">
+            <%= bar_chart @quantity_purshaces_day, messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Cantidad", title: "Cantidad Ventas Diarias"%>
+        </div>
+        <div class="col-3 rounded shadow-lg m-4">
+            <%= column_chart @quantity_purshaces_12_moths, messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Cantidad", title: "Cantidad de Compras X Mes del Ultimo Año"%>
+        </div>
+        <div class="col-3 rounded shadow-lg m-4">
+             <%= column_chart @total_purshaces_12_moths,prefix: "$", messages: {empty: "Sin Ventas"},thousands: ".", label: "Pesos", legend:   "bottom",colors: ["#d80404", "#666"], title: "Total en Compras X Mes del Ultimo Año"%>
+        </div>
+        <div class="col-3 rounded shadow-lg m-4">
+             <%= line_chart @quantity_in_progress_12_moths, messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Cantidad",title: "Ventas en Curso"%>
+        </div>
+        <div class="col-3 rounded shadow-lg m-4">
+             <%= line_chart @quantity_pending_12_moths, messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Cantidad",title: "Ventas Pendientes"%>
+        </div>
+        <div class="col-3 rounded shadow-lg m-4">
+             <%= line_chart @quantity_canceled_by_user_12_moths, messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Cantidad",title: "Ventas Canceladas X Usuario"%>
+        </div>
+
+    </div>
+    <!--Footer-->
+    <div class="container-fluid bg-dark mt-5">
+
+    
+        <!--Section: Content-->
+        <section class="px-md-5 mx-md-5 py-5 text-center text-50 text-white  z-depth-1 rounded">
+
+          <h5 class="">Jeans Lover Shop <i class="fa fa-heart text-danger mx-1"></i> Sitio Creado por Alvaro Rivas</h5>
+
+        </section>
+        <!--Section: Content-->
+
+
+    </div>
+    <!--Footer-->
+
+</div>

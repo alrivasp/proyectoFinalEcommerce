@@ -20,3 +20,106 @@
     $("#list_product-ppal-free").html("<%= j render partial: "product", collection: @products %>");
 
     //popularidad
+
+    //Comment
+    $('#input_title_review').val("");
+    $('#input_body_review').val("");
+
+    $("#container-detail-reviews").text("");
+    <%if !@comment.nil? %>
+        <% @product.reviews.order(created_at: :desc).each_with_index do |review, index| %>
+            $(document.createElement('div')).addClass("row m-4 p-3 rounded-pill shadow-lg").attr("id", "review-<%= index %>").appendTo("#container-detail-reviews");
+            <% if review.user.avatar.attached? %>
+                $(document.createElement('div')).addClass("col-3").attr("id", "image-review-<%= index %>").appendTo("#review-<%= index %>");
+                img = '<%= image_tag (review.user.avatar.variant(resize: "120x120") ), class:"shadow-lg rounded-circle d-flex mr-3"%>'
+                $("#image-review-<%= index %>").html(img);
+                //media body
+                $(document.createElement('div')).addClass("col-9").attr("id", "body-review-<%= index %>").appendTo("#review-<%= index %>");
+                 //nombre
+                $(document.createElement('h6')).addClass("font-weight-bold")
+                                                .html("<%= review.user.user_name %>")
+                                               .appendTo("#body-review-<%= index %>");
+
+                //popularidad
+                <% point_review = review.punctuation %>
+                $(document.createElement('span')).addClass("")
+                                                .attr("id", "punctiation-review-<%= index %>")
+                                                .appendTo("#body-review-<%= index %>");
+
+                <% if !point_review.nil? %>
+                    <% point_review.times do |i|%>
+                        $(document.createElement('i')).addClass("fa fa-star text-warning")
+                                                      .attr("aria-hidden","true")
+                                                      .appendTo("#punctiation-review-<%= index %>");
+                    <% end %>
+                <% else %>
+                    <% point_review = 0 %>
+                <% end %>
+                <% star_review = 5 - point_review%>
+                <% star_review.times do |i|%>
+                    $(document.createElement('i')).addClass("fa fa-star text-secondary")
+                                                  .attr("aria-hidden","true")
+                                                  .appendTo("#punctiation-review-<%= index %>");
+                <% end %>
+            //fecha
+            $(document.createElement('br')).appendTo("#body-review-<%= index %>");
+            $(document.createElement('span')).addClass("text-muted font-size-review")
+                                                .html("<i class='fa fa-clock-o mr-2' aria-hidden='true'></i> <%= review.created_at.strftime("%d-%m-%Y") %>")
+                                               .appendTo("#body-review-<%= index %>");
+            $(document.createElement('br')).appendTo("#body-review-<%= index %>");
+            $(document.createElement('span')).addClass("text-muted font-size-review")
+                                                .html("<strong><%= review.title %></strong> :  ")
+                                               .appendTo("#body-review-<%= index %>");
+
+            $(document.createElement('span')).addClass("text-muted font-size-review-body")
+                                                .html("<%= review.body %>.-")
+                                               .appendTo("#body-review-<%= index %>");
+            <% else %>
+                $(document.createElement('div')).addClass("col-3").attr("id", "image-review-<%= index %>").appendTo("#review-<%= index %>");
+                img = '<%= image_tag("perfil", class:"rounded-circle photo-reviews shadow-lg" )%>'
+                $("#image-review-<%= index %>").html(img);
+            //media body
+                $(document.createElement('div')).addClass("col-9").attr("id", "body-review-<%= index %>").appendTo("#review-<%= index %>");
+            //nombre
+                $(document.createElement('h6')).addClass("font-weight-bold")
+                                                .html("<%= review.user.user_name %>")
+                                               .appendTo("#body-review-<%= index %>");
+
+            //popularidad
+                <% point_review = review.punctuation %>
+                $(document.createElement('span')).addClass("")
+                                                .attr("id", "punctiation-review-<%= index %>")
+                                                .appendTo("#body-review-<%= index %>");
+
+                <% if !point_review.nil? %>
+                    <% point_review.times do |i|%>
+                        $(document.createElement('i')).addClass("fa fa-star text-warning")
+                                                      .attr("aria-hidden","true")
+                                                      .appendTo("#punctiation-review-<%= index %>");
+                    <% end %>
+                <% else %>
+                    <% point_review = 0 %>
+                <% end %>
+                <% star_review = 5 - point_review%>
+                <% star_review.times do |i|%>
+                    $(document.createElement('i')).addClass("fa fa-star text-secondary")
+                                                  .attr("aria-hidden","true")
+                                                  .appendTo("#punctiation-review-<%= index %>");
+                <% end %>
+            //fecha
+            $(document.createElement('br')).appendTo("#body-review-<%= index %>");
+            $(document.createElement('span')).addClass("text-muted font-size-review")
+                                                .html("<i class='fa fa-clock-o mr-2' aria-hidden='true'></i> <%= review.created_at.strftime("%d-%m-%Y") %>")
+                                               .appendTo("#body-review-<%= index %>");
+            $(document.createElement('br')).appendTo("#body-review-<%= index %>");
+            $(document.createElement('span')).addClass("text-muted font-size-review")
+                                                .html("<strong><%= review.title %></strong> :  ")
+                                               .appendTo("#body-review-<%= index %>");
+
+            $(document.createElement('span')).addClass("text-muted font-size-review-body")
+                                                .html("<%= review.body %>.-")
+                                               .appendTo("#body-review-<%= index %>");
+
+            <% end %>
+        <% end %>
+    <% end %>

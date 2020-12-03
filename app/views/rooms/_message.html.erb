@@ -1,0 +1,23 @@
+    <% if message.sender == current_user.id %>
+        <div class="outgoing_msg">
+            <div class="sent_msg">
+              <p><%= message.content%></p>
+              <span class="time_date"> <%= message.created_at.strftime("%H:%M")%>    |     <%= message.created_at.strftime("%d-%m-%Y")%></span> </div>
+        </div>
+    <% else %>
+        <% imagen_user = User.find(message.sender.to_i) %>
+        <div class="incoming_msg">
+            <div class="incoming_msg_img"> 
+            <% if imagen_user.avatar.attached? %>
+              <%= image_tag imagen_user.avatar, class:"" %>
+            <% else %>
+              <%= image_tag("perfil", class:"" )%>
+            <% end %>
+            </div>
+            <div class="received_msg">
+              <div class="received_withd_msg">
+               <p><%= message.content%></p>
+              <span class="time_date"> <%= message.created_at.strftime("%H:%M")%>    |     <%= message.created_at.strftime("%d-%m-%Y")%></span> </div>
+            </div>
+          </div>
+    <% end %>

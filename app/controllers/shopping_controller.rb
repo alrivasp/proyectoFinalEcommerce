@@ -1,8 +1,10 @@
 class ShoppingController < ApplicationController
   def main
+    authorize! :main_shopping, :logs
   end
 
   def in_progress
+    authorize! :in_progress_shopping, :logs
     orders = Order.where(user_id: current_user)
     @orders =[]
     orders.each do |order|
@@ -14,6 +16,7 @@ class ShoppingController < ApplicationController
   end
 
   def pending
+    authorize! :pending_shopping, :logs
     #capturo las ordenes del cliente logeado
     orders = Order.where(user_id: current_user)
     @orders =[]
@@ -28,6 +31,7 @@ class ShoppingController < ApplicationController
   end
   
   def finished
+    authorize! :finished_shopping, :logs
     #capturo las ordenes del cliente logeado
     orders = Order.where(user_id: current_user)
     @orders =[]
@@ -42,6 +46,7 @@ class ShoppingController < ApplicationController
   end
   
   def canceled
+    authorize! :canceled_shopping, :logs
     #capturo las ordenes del cliente logeado
     orders = Order.where(user_id: current_user)
     @orders =[]
@@ -56,6 +61,7 @@ class ShoppingController < ApplicationController
   end
 
   def get_order
+    authorize! :get_order_shopping, :logs
     @order = Order.find(params[:order_id])
     @type = params[:option]
     @items = @order.order_items.all
@@ -63,6 +69,7 @@ class ShoppingController < ApplicationController
   end
 
   def cancel_order
+    authorize! :cancel_order_shopping, :logs
       order = Order.find(params[:order_id])
       os = OrderStatus.find(6)
       OrderHistory.create(description: os.description, order_id: order.id, order_status_id: 6)
@@ -79,6 +86,7 @@ class ShoppingController < ApplicationController
 
   #Backend Busqueda en pendiente
   def search_pending
+    authorize! :search_pending_shopping, :logs
     respond_to do |format|
       if params[:search]
         #capturo las ordenes del cliente logeado
@@ -112,6 +120,7 @@ class ShoppingController < ApplicationController
 
   #Backend Busqueda en finalizado
   def search_finished
+    authorize! :search_finished_shopping, :logs
     respond_to do |format|
       if params[:search]
         #capturo las ordenes del cliente logeado
@@ -145,6 +154,7 @@ class ShoppingController < ApplicationController
 
   #Backend Busqueda en Cancelados
   def search_canceled
+    authorize! :search_canceled_shopping, :logs
     respond_to do |format|
       if params[:search]
         #capturo las ordenes del cliente logeado

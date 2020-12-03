@@ -12,9 +12,23 @@ $(document.createElement('h6')).addClass("text-center").html("Muchas Gracias por
 btn =  '<%= link_to "Aceptar", cart_in_progress_path, class:"btn btn-success" %>'
     $("#footerModalCartCheckOutEnd").html(btn)
 
-$('#modalCartCheckOutSummaryOrder').modal('hide')
-$('#modalCartCheckOutEnd').modal('show')
+
 
 $("#item_List_cart").html("");
 $("#item_List_cart").html(" <%= j render partial: 'item', collection: @items %>");
 
+$('#numeric-cart').text("")
+        $(document.createElement("span"))
+                                        .addClass("badge badge-pill badge-danger accesos-iconos-badge")
+                                        .html("0")
+                                        .appendTo("#numeric-cart");
+
+$('#in_progress_total').text("")
+$('#btn-in-progress').text("")
+
+
+$('#modalCartCheckOutSummaryOrder').modal('hide')
+$('#modalCartCheckOutEnd').modal('show')
+
+   
+        

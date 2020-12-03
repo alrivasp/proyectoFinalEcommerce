@@ -1,3 +1,8 @@
+//limpiarCampos
+$('#modalProductmanagerLabel').text("")
+$('#bodyModalProductManager').text("")
+$('#footerModalProductManager').text("")
+
 <% if @type == 'editar'%>
     //Formulario
     $("#variant_id_edit").val("<%= @variant.id %>")
@@ -8,7 +13,7 @@
 
     $("#modalVariantProductManagerEdit").modal("show")
 <% elsif @type == 'ver' %>
-                //Titulo
+        //Titulo
         $('#modalProductmanagerLabel').html("<strong> <%= @product.name.html_safe %>  </strong>")
         //Cuerpo
         $(document.createElement('div')).html("<%= j render 'detailProduct' %>").appendTo("#bodyModalProductManager");
@@ -16,7 +21,7 @@
         $(document.createElement('h1')).html("<%= @product.name.html_safe %>").appendTo("#bodyProductManager");
         $(document.createElement('br')).appendTo("#bodyProductManager");
         <% if @product.front.attached? %>
-            img =  '<%= image_tag  @product.front.variant(resize: "400x500"), class:"" %>'
+            img =  '<%= image_tag  @product.front.variant(resize: "400x500"), class:"image-fluid" %>'
             $("#photoFrontProduct").html(img)
         <% else %>
             img = '<%= image_tag("photo-default", class:"photo-default" )%>'

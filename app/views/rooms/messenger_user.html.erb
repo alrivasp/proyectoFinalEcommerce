@@ -1,0 +1,46 @@
+<div class="text-center pt-4 mb-2 ">
+        <%= image_tag "banner_mensajeria_user", class:"title-talla "%>
+</div>
+
+<div class="container-msg-user">
+  <div class="messaging">
+    <div class="inbox_msg">
+      <div class="mesgs-user">
+        <!--Envio de Mensaje-->
+        <div class="msg_history_user" id="notication-messenger-user">
+
+          
+                <%=  render partial: "message", collection: @messages %>
+          
+
+        </div>
+        <!--Envio de Mensaje-->
+        <!--Fomr de envio de mensaje-->
+        <div class="type_msg">
+            <div class="input_msg_write"> 
+                <%= form_tag( notification_user_message_rooms_path, method: "get", remote: true, class:"input_msg_write") do %>
+                  <%= text_field_tag :msg_chat_user, params[:msg] , id: :input_chat_user , class:"input_send_message", placeholder:"Ingrese Mensaje...", :required => true %>
+                  <%= submit_tag "".html_safe, class:"msg_send_btn", id: :submit_chat_user %>
+                <% end %>
+            </div>
+        </div>
+        <!--Fomr de envio de mensaje-->
+      </div>
+    </div>
+  </div>
+</div>    
+<!--Footer-->
+    <div class="container-fluid bg-dark mt-2">
+
+    
+        <!--Section: Content-->
+        <section class="px-md-5 mx-md-5 py-5 text-center text-50 text-white  z-depth-1 rounded">
+
+          <h5 class="">Jeans Lover Shop <i class="fa fa-heart text-danger mx-1"></i> Sitio Creado por Alvaro Rivas</h5>
+
+        </section>
+        <!--Section: Content-->
+
+
+    </div>
+<!--Footer-->

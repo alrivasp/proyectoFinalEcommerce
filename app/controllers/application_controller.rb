@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
+    before_action :initial_permitted_parameters, if: :devise_controller?
     before_action :configure_permitted_parameters, if: :devise_controller?
 
+        
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:account_update) {
         |u| u.permit(:email,
@@ -20,6 +22,17 @@ class ApplicationController < ActionController::Base
                     )
         }
     end
+
+    def initial_permitted_parameters
+        devise_parameter_sanitizer.permit(:sign_up) {
+        |u| u.permit(:email,
+                     :commune_id,
+                     :password,
+                     :password_confirmation
+                    )
+        }
+    end
+    
 
     rescue_from CanCan::AccessDenied do |exception|
         respond_to do |format|

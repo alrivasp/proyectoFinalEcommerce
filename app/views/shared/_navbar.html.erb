@@ -17,33 +17,49 @@
       <p class="mb-0 title-ppal">JEANS LOVERS SHOP</p>
     <% end %>  
     <div class="mr-5">
+
       <%if user_signed_in? %>
-        <% if current_user.orders.present? %>
-          <% if current_user.orders.last.order_histories.last.order_status_id == 1 %>
-            <% aux = current_user.orders.last.order_items.count %>
-            <span id="numeric-cart"><span class="badge badge-pill badge-danger accesos-iconos-badge"><%= aux %></span></span>
+        <% if current_user.permission_level == 0 %>
+          <% if current_user.orders.length > 0 %>
+            <%  if current_user.orders.last.order_histories.last.order_status_id == 1 %>
+              <% aux = current_user.orders.last.order_items.count %>
+              <span id="numeric-cart"><span class="badge badge-pill badge-danger accesos-iconos-badge"><%= aux %></span></span>
+            <%else%>
+              <span id="numeric-cart"><span class="badge badge-pill badge-danger accesos-iconos-badge">0</span></span>
+            <% end %>
+          <% else %>
+            <span id="numeric-cart"><span class="badge badge-pill badge-danger accesos-iconos-badge">0</span></span>
           <% end %>
-        <% else %>
-          
-        <% end %>  
+        <% end %>
       <% end %>
-      <%= link_to "<i class='fa fa-shopping-bag fa-2x accesos-iconos text-decoration-none text-dark '></i>".html_safe %>
-      <%= link_to "<i class='fa fa-search fa-2x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe %>
+
+      <% if user_signed_in? %>
+        <% if current_user.permission_level == 0%>
+          <%= link_to "<i class='fa fa-shopping-bag fa-2x accesos-iconos text-decoration-none text-dark '></i>".html_safe, cart_in_progress_path %>
+          <%= link_to "<i class='fa fa-comment fa-2x accesos-iconos text-decoration-none text-dark ml-1 mr-3'></i>".html_safe,  rooms_messenger_user_path %>
+        <% else %>
+          <%= link_to "<i class='fa fa-comment fa-2x accesos-iconos text-decoration-none text-dark ml-2'></i>".html_safe,  rooms_messenger_admin_path %>
+        <% end %>
+      <% else %>
+        <%= link_to "<i class='fa fa-shopping-bag fa-2x accesos-iconos text-decoration-none text-dark '></i>".html_safe, new_user_session_path %>
+      <% end %>
+
       <% if user_signed_in? %>
         <%= link_to "<i class='fa fa-sign-out fa-1x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe , destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "<i class='fa fa-user fa-1x accesos-iconos text-decoration-none text-dark mr-3'></i>".html_safe , new_user_session_path %>
       <% end %>
+
     </div>
   </nav>
   <!--Info de tienda-->
   <div class="container contenedor-menu"> 
       <nav class="container dropdownmenu">
-        <ul class="row justify-content-center ">
-          <li class="col-3"><%= link_to "Inicio", root_path %></li>
-          <li class="col-3"><%= link_to "Productos", products_main_path %></li>
-          <li class="col-3"><%= link_to "Tallas"%></li>
-          <li class="col-3"><%= link_to "Contacto"%></li>
+        <ul class="row justify-content-center">
+          <li class="col-3 "><%= link_to "Inicio", root_path %></li>
+          <li class="col-3 "><%= link_to "Productos", products_main_path %></li>
+          <li class="col-3 "><%= link_to "Tallas", home_tallas_path%></li>
+          <li class="col-3 "><%= link_to "Contacto", home_contacto_path %></li>
         </ul>
       </nav>
   </div>

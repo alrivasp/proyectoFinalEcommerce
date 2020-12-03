@@ -13,14 +13,15 @@
                                     .html('<strong>Detalle de OC</strong>').appendTo("#titleBodyOrderManagerDetail");
     //Tabla
     $('#detailTableOrderManagerDetail').text("")
-    <% @order_items.each do |oi|%>
-        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.sku %>").appendTo("#detailTableOrderManagerDetail");
-        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.name %>").appendTo("#detailTableOrderManagerDetail");
-        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.model_product.name %>").appendTo("#detailTableOrderManagerDetail");
-        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.model_product.mark.name %>").appendTo("#detailTableOrderManagerDetail");
-        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.size_product.name %>").appendTo("#detailTableOrderManagerDetail");
-        $(document.createElement('td')).addClass("text-center").html("<%= oi.quantity %>").appendTo("#detailTableOrderManagerDetail");
-        $(document.createElement('td')).addClass("text-center").html("<%= number_to_currency(oi.price ,unit: '$', :precision => 0, format: "%u %n") %>").appendTo("#detailTableOrderManagerDetail");
+    <% @order_items.each_with_index do |oi, index|%>
+        $(document.createElement('tr')).attr("id","colModalOrderDetailTable-<%= index %>").appendTo("#detailTableOrderManagerDetail");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.sku %>").appendTo("#colModalOrderDetailTable-<%= index %>");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.name %>").appendTo("#colModalOrderDetailTable-<%= index %>");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.model_product.name %>").appendTo("#colModalOrderDetailTable-<%= index %>");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.product.model_product.mark.name %>").appendTo("#colModalOrderDetailTable-<%= index %>");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.variant.size_product.name %>").appendTo("#colModalOrderDetailTable-<%= index %>");
+        $(document.createElement('td')).addClass("text-center").html("<%= oi.quantity %>").appendTo("#colModalOrderDetailTable-<%= index %>");
+        $(document.createElement('td')).addClass("text-center").html("<%= number_to_currency(oi.price ,unit: '$', :precision => 0, format: "%u %n") %>").appendTo("#colModalOrderDetailTable-<%= index %>");
     <% end %>
 
     //Footer

@@ -10,7 +10,8 @@
     <td class="align-middle"><%= variant.stock %></td>
     <td class="align-middle">
       <%= link_to "Ver ", get_variant_productmanager_info_path(variant, 'ver'), remote:true, class:"btn btn-success  btn-sm" %>
+    </td>
+    <td class="align-middle">
       <%= link_to "Editar", get_variant_productmanager_info_path(variant, 'editar'), remote:true, class:"btn btn-warning  btn-sm" %>
     </td>
-
   </tr>

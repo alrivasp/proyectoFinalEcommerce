@@ -1,20 +1,41 @@
-<div class="p-4">
-    <h2 class="text-center">Administrar Perfiles</h2>
-    <%= render partial: 'title'%>
-    <div class="mt-4">
-        <div class="jumbotron jumbotron-fluid bg-light">
-             <div class="row  justify-content-md-center">
-                <div class="col-7 text-center"> 
-                    <h1 class="display-6 ">Hola <%= current_user.user_name%></h1>
-                    <p class="lead">Selecciona que tipo de usuarios deseas manejar.</p>
-                    <%= image_tag "jls_logo_", class:"icon ",id:"icon" %>
-                </div>
-                <div  class="col-5 text-center">
-                    <%= image_tag "adm", class:" w-50 float-center" %>
-                </div>
+<div class="mb-5">
+    <div class="text-center pt-4 mb-2 ">
+        <%= image_tag "banner_manager_profile", class:"title-talla "%>
+    </div>
+    <div class="ml-4 p4">
+          <%= render partial: 'title'%>
+    </div>
+    <div class="mt-4 ml-5 mr-5 pl-5 pr-5 mb-5 mt-5">
+        <div class="jumbotron jumbotron-fluid bg-paint rounded">
+             <div class="ml-5 mr-5 pl-5 pr-5 row align-items-start justify-content-center">
+                
+                    <div class="col-7 text-center"> 
+                        <h1 class="display-6 ">Hola <%= current_user.user_name%></h1>
+                        <p class="lead">Selecciona que tipo de usuarios deseas manejar.</p>
+                        <%= image_tag "jls_logo_", class:"icon ",id:"icon" %>
+                    </div>
+                    <div  class="col-5 text-center">
+                        <%= image_tag "adm", class:"image-fluid w-75 float-center" %>
+                    </div>
+                
             </div>
         </div>
     </div>
+    <!--Footer-->
+    <div class="container-fluid bg-dark mt-2">
+
+    
+        <!--Section: Content-->
+        <section class="px-md-5 mx-md-5 py-5 text-center text-50 text-white  z-depth-1 rounded">
+
+          <h5 class="">Jeans Lover Shop <i class="fa fa-heart text-danger mx-1"></i> Sitio Creado por Alvaro Rivas</h5>
+
+        </section>
+        <!--Section: Content-->
+
+
+    </div>
+<!--Footer-->
 </div>
 
 
