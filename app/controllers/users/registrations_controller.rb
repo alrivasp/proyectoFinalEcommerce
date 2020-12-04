@@ -15,12 +15,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-   def edit
-     #super
-     @regiones = Region.all
-     @provincias = Province.all
-     @comunas = Commune.order(name: :asc)
-   end
+  # def edit
+  #   #super
+  #   @regiones = Region.all
+  #   @provincias = Province.all
+  #   @comunas = Commune.order(name: :asc)
+  # end
 
   # PUT /resource
   # def update

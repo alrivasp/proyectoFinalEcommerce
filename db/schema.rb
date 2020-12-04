@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(version: 2020_12_02_002938) do
     t.integer "gender"
     t.integer "permission_level", default: 0, null: false
     t.string "street"
-    t.bigint "commune_id"
+    t.bigint "commune_id", default: 127, null: false
     t.boolean "deactivated", default: false, null: false
     t.string "uid"
     t.string "provider"

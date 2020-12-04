@@ -10,7 +10,7 @@
      <br/>
       <!--Comuna-->
       <div><%= f.label :commune_id, "Comuna" %><br/>
-        <%= f.select(:commune_id, Commune.all.collect{|p|[p.name, p.id]},  {include_blank: "Seleccione su Comuna"}, { :class => 'form-control' } ) %>
+        <%= f.select(:commune_id, Commune.order(name: :asc).all.collect{|p|[p.name, p.id]},  {include_blank: "Seleccione su Comuna"}, { :class => 'form-control' } ) %>
 
 
     <br />

@@ -119,7 +119,7 @@ class CartController < ApplicationController
         \n Atentamente Equipo Jeans Lovers Shop.-" )
     end
     email_from_ruby = Mail.new(from, subject, to, content)
-    sg = SendGrid::API.new(api_key: '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')
+    sg = SendGrid::API.new(api_key: ENV['API_KEY'])
     response = sg.client.mail._('send').post(request_body: email_from_ruby.to_json)
 
     if response.status_code == "202"
