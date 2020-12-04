@@ -7,12 +7,9 @@ _Jeans Loves Shop es un emprendimiento que nace post estallido social y pre pand
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Mira **Deployment** para conocer como desplegar el proyecto.
-
-
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+_Que cosas necesitas para instalar el software_
 
 ```
 Ruby 2.6.0
@@ -55,7 +52,6 @@ _Y visualizar en browser_
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
 
 Visual Studio Code
 Bootstap
@@ -72,7 +68,6 @@ Usamos GitHub para el versionado.
 
 ## Autores ✒️
 
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
 * **Alvaro Rivas** - *Trabajo Completo* - [alrivasp](https://github.com/alrivasp)
 
