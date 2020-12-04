@@ -89,9 +89,9 @@ class CartController < ApplicationController
     
 
     #Correo
-    from    = Email.new(email: 'alvaro.rivas.p@outlook.com')
+    from    = Email.new(email: 'jeans.lovers.shop@outlook.com')
     to      = Email.new(email: "#{current_user.email}")
-    subject = "#{@order.number} | Jeans Lover Shop"
+    subject = "#{@order.number} | Jeans Lovers Shop"
 
     if pm == 1 && @order.order_type_id == 1
       content = Content.new(type: "text/plain", value: "Estimado #{current_user.name} #{current_user.last_name} \n

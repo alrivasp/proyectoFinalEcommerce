@@ -14,12 +14,6 @@
              <%= column_chart @total_purshaces_12_moths,prefix: "$", messages: {empty: "Sin Ventas"},thousands: ".", label: "Pesos", legend:   "bottom",colors: ["#d80404", "#666"], title: "Total en Compras X Mes del Ultimo Año"%>
         </div>
         <div class="col-3 rounded shadow-lg m-4">
-             <%= line_chart @quantity_in_progress_12_moths, messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Cantidad",title: "Ventas en Curso"%>
-        </div>
-        <div class="col-3 rounded shadow-lg m-4">
-             <%= line_chart @quantity_pending_12_moths, messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Cantidad",title: "Ventas Pendientes"%>
-        </div>
-        <div class="col-3 rounded shadow-lg m-4">
              <%= line_chart @quantity_canceled_by_user_12_moths, messages: {empty: "Sin Ventas"}, legend: "bottom", label: "Cantidad",title: "Ventas Canceladas X Usuario"%>
         </div>
 

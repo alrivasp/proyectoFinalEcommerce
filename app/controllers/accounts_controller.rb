@@ -17,14 +17,6 @@ class AccountsController < ApplicationController
                                         .where(order_histories: {order_status_id: 8})
                                         .group_by_month(:created_at, format: "%b %Y").sum(:total)
 
-    @quantity_in_progress_12_moths = Order.joins(:order_histories)
-                                          .where(order_histories: {order_status_id: 1})
-                                          .group_by_month(:created_at, format: "%b %Y").count
-
-    @quantity_pending_12_moths = Order.joins(:order_histories)
-                                      .where(order_histories: {order_status_id: [2,3,4,5]})
-                                      .group_by_month(:created_at, format: "%b %Y").count
-
     @quantity_canceled_by_user_12_moths = Order.joins(:order_histories)
                                       .where(order_histories: {order_status_id: 6})
                                       .group_by_month(:created_at, format: "%b %Y").count
