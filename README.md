@@ -1,4 +1,3 @@
-# README
 # Jeans Lovers Shop
 
 _Jeans Loves Shop es un emprendimiento que nace post estallido social y pre pandemia se desarrollo pensando digitalizar una pyme infromal que opera via redes sociales, este proyecto cumple con los requisitos solicitados por la academia tecnologica Desafio latam_
